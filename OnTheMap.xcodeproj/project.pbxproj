@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		EAE8163F1E20977B00AC4406 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE8163E1E20977B00AC4406 /* AppDelegate.swift */; };
-		EAE816411E20977B00AC4406 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE816401E20977B00AC4406 /* ViewController.swift */; };
 		EAE816441E20977B00AC4406 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAE816421E20977B00AC4406 /* Main.storyboard */; };
 		EAE816461E20977B00AC4406 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE816451E20977B00AC4406 /* Assets.xcassets */; };
 		EAE816491E20977B00AC4406 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAE816471E20977B00AC4406 /* LaunchScreen.storyboard */; };
+		EAE816571E20988000AC4406 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE816561E20988000AC4406 /* UdacityClient.swift */; };
+		EAE816591E20A8C400AC4406 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = EAE816581E20A8C400AC4406 /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EAE8163B1E20977B00AC4406 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE8163E1E20977B00AC4406 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EAE816401E20977B00AC4406 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EAE816431E20977B00AC4406 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EAE816451E20977B00AC4406 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EAE816481E20977B00AC4406 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EAE8164A1E20977B00AC4406 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EAE816561E20988000AC4406 /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
+		EAE816581E20A8C400AC4406 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +57,54 @@
 			isa = PBXGroup;
 			children = (
 				EAE8163E1E20977B00AC4406 /* AppDelegate.swift */,
-				EAE816401E20977B00AC4406 /* ViewController.swift */,
-				EAE816421E20977B00AC4406 /* Main.storyboard */,
-				EAE816451E20977B00AC4406 /* Assets.xcassets */,
-				EAE816471E20977B00AC4406 /* LaunchScreen.storyboard */,
-				EAE8164A1E20977B00AC4406 /* Info.plist */,
+				EAE816531E2097D600AC4406 /* Model */,
+				EAE816501E20979600AC4406 /* View */,
+				EAE816521E2097C900AC4406 /* Controller */,
+				EAE816511E2097AE00AC4406 /* Support */,
 			);
 			path = OnTheMap;
+			sourceTree = "<group>";
+		};
+		EAE816501E20979600AC4406 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EAE816421E20977B00AC4406 /* Main.storyboard */,
+				EAE816471E20977B00AC4406 /* LaunchScreen.storyboard */,
+				EAE816451E20977B00AC4406 /* Assets.xcassets */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		EAE816511E2097AE00AC4406 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				EAE816581E20A8C400AC4406 /* .gitignore */,
+				EAE8164A1E20977B00AC4406 /* Info.plist */,
+			);
+			name = Support;
+			sourceTree = "<group>";
+		};
+		EAE816521E2097C900AC4406 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		EAE816531E2097D600AC4406 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EAE816541E20986D00AC4406 /* Client */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		EAE816541E20986D00AC4406 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				EAE816561E20988000AC4406 /* UdacityClient.swift */,
+			);
+			name = Client;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,6 +167,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAE816591E20A8C400AC4406 /* .gitignore in Resources */,
 				EAE816491E20977B00AC4406 /* LaunchScreen.storyboard in Resources */,
 				EAE816461E20977B00AC4406 /* Assets.xcassets in Resources */,
 				EAE816441E20977B00AC4406 /* Main.storyboard in Resources */,
@@ -137,7 +181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAE816411E20977B00AC4406 /* ViewController.swift in Sources */,
+				EAE816571E20988000AC4406 /* UdacityClient.swift in Sources */,
 				EAE8163F1E20977B00AC4406 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
