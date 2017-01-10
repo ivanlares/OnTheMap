@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA04BC2A1E235272001DDCC2 /* UdacityClientConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA04BC291E235272001DDCC2 /* UdacityClientConstants.swift */; };
 		EAE8163F1E20977B00AC4406 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE8163E1E20977B00AC4406 /* AppDelegate.swift */; };
 		EAE816441E20977B00AC4406 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAE816421E20977B00AC4406 /* Main.storyboard */; };
 		EAE816461E20977B00AC4406 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE816451E20977B00AC4406 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EA04BC291E235272001DDCC2 /* UdacityClientConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClientConstants.swift; sourceTree = "<group>"; };
 		EAE8163B1E20977B00AC4406 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE8163E1E20977B00AC4406 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAE816431E20977B00AC4406 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				EAE816561E20988000AC4406 /* UdacityClient.swift */,
+				EA04BC291E235272001DDCC2 /* UdacityClientConstants.swift */,
 			);
 			name = Client;
 			sourceTree = "<group>";
@@ -186,6 +189,7 @@
 			files = (
 				EAE8165B1E20AF6100AC4406 /* LoginViewController.swift in Sources */,
 				EAE816571E20988000AC4406 /* UdacityClient.swift in Sources */,
+				EA04BC2A1E235272001DDCC2 /* UdacityClientConstants.swift in Sources */,
 				EAE8163F1E20977B00AC4406 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,6 +354,7 @@
 				EAE8164F1E20977B00AC4406 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

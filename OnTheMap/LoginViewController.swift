@@ -24,7 +24,22 @@ class LoginViewController: UIViewController{
     }
     
     @IBAction func didPressLogin(_ sender: UIButton) {
-        
+        // check for nil 
+        guard let email = emailTextField.text else {
+            return
+        }
+        guard let password = passwordTextField.text else {
+            return
+        }
+        // check for white space
+        guard !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            return
+        }
+        guard !password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            return
+        }
+
+        login()
     }
     
     // MARK: Helper
@@ -34,25 +49,16 @@ class LoginViewController: UIViewController{
         passwordTextField.delegate = self
     }
     
-    func login(){ // Example code provided by Udacity
-        let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"udacity\": {\"username\": \"account@domain.com\", \"password\": \"********\"}}".data(using: String.Encoding.utf8)
-        let session = URLSession.shared
-        let task = session.dataTask(with: request as URLRequest) { data, response, error in
-            if error != nil { // Handle error…
-                return
-            }
-            let range = Range(uncheckedBounds: (5, data!.count - 5))
-            let newData = data?.subdata(in: range) /* subset response data! */
-            print(NSString(data: newData!, encoding: String.Encoding.utf8.rawValue)!)
+    func login(){
+        UdacityClient.sharedInstance.loginWith(username: emailTextField.text!, password: passwordTextField.text!){ success, error in
+            print("\nsuccess: \(success)\n")
+            print("\n\((error as? NSError)?.localizedDescription)\n")
         }
-        task.resume()
     }
     
-    func logout(){ // Example code provided by Udacity
+    func logout(){
+        
+        // Example code provided by Udacity
         let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
         request.httpMethod = "DELETE"
         var xsrfCookie: HTTPCookie? = nil
