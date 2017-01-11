@@ -27,6 +27,9 @@ extension UdacityClient{
         static let user = "user"
         static let firstName = "first_name"
         static let lastName = "last_name"
+        
+        static let error = "error"
+        static let status = "status"
     }
     
     struct Methods {

@@ -92,7 +92,7 @@ class UdacityClient{
                 return
             }
             // check if the server returned an error
-            if let errorString = result?["error"] as? String, let errorCode = result?["status"] as? Int{
+            if let errorString = result?[JsonKeys.error] as? String, let errorCode = result?[JsonKeys.status] as? Int{
                 completionHandler(false, NSError(domain: "com.laresivan.onthemap", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorString]))
                 return
             }
