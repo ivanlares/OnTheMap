@@ -51,8 +51,12 @@ class LoginViewController: UIViewController{
     
     func login(){
         UdacityClient.sharedInstance.loginWith(username: emailTextField.text!, password: passwordTextField.text!){ success, error in
-            print("\nsuccess: \(success)\n")
-            print("\n\((error as? NSError)?.localizedDescription)\n")
+            if success{
+                DispatchQueue.main.async {
+                    self.transitonToStudentData()
+                    return
+                }
+            }
         }
     }
     
@@ -79,6 +83,12 @@ class LoginViewController: UIViewController{
             print(NSString(data: newData!, encoding: String.Encoding.utf8.rawValue)!)
         }
         task.resume()
+    }
+    
+    func transitonToStudentData(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let studentInfoTabBarController = storyboard.instantiateViewController(withIdentifier: "StudentInfoTabBar")
+        present(studentInfoTabBarController, animated: true, completion: nil)
     }
     
 }
