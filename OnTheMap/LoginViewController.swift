@@ -62,6 +62,9 @@ class LoginViewController: UIViewController{
     }
     
     func transitonToStudentData(){
+        emailTextField.text = nil
+        passwordTextField.text = nil
+
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let studentInfoTabBarController = storyboard.instantiateViewController(withIdentifier: "StudentInfoTabBar")
         present(studentInfoTabBarController, animated: true, completion: nil)
