@@ -14,4 +14,11 @@ class MapViewController: UIViewController{
     
     @IBOutlet weak var mapView: MKMapView!
     
+    // MARK: - Target Action 
+    
+    @IBAction func didPressLogout(_ sender: UIBarButtonItem) {
+        UdacityClient.sharedInstance.logout() 
+    }
+    
+    
 }

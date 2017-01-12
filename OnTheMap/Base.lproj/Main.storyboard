@@ -121,7 +121,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7gd-4f-RcE">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="eHR-sq-RTE"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="eHR-sq-RTE">
+                            <connections>
+                                <action selector="didPressLogout:" destination="muj-qP-VQz" id="gt0-PM-QA8"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="cA8-cB-8eG"/>
                             <barButtonItem systemItem="refresh" id="eGP-W2-4gv"/>
