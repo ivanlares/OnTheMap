@@ -14,14 +14,15 @@ class LoginViewController: UIViewController{
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask{
+        return .portrait
+    }
+    
     override func viewDidLoad() {
         setDelegates()
     }
     
     // MARK: Target Action
-    
-    override func viewWillAppear(_ animated: Bool) {
-    }
     
     @IBAction func didPressLogin(_ sender: UIButton) {
         // check for nil 
@@ -90,7 +91,7 @@ class LoginViewController: UIViewController{
         let studentInfoTabBarController = storyboard.instantiateViewController(withIdentifier: "StudentInfoTabBar")
         present(studentInfoTabBarController, animated: true, completion: nil)
     }
-    
+
 }
 
 extension LoginViewController: UITextFieldDelegate{
