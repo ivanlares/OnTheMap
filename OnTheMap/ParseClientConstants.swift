@@ -15,4 +15,20 @@ extension ParseClient{
         static let apiKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
     }
     
+    struct Url{
+        static let base =
+            "https://parse.udacity.com/parse/classes/StudentLocation"
+        
+    }
+    
+    struct QueryParameters{
+        static let order = "order"
+        static let limit = "limit"
+    }
+    
+    struct QueryValues{
+        static let order = "-createdAt,-updatedAt"
+        static let limit = 100 
+    }
+    
 }
