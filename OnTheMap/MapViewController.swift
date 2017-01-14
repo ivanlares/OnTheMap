@@ -14,7 +14,45 @@ class MapViewController: UIViewController{
     
     @IBOutlet weak var mapView: MKMapView!
     
-    // MARK: - Target Action 
+    override func viewDidLoad() {
+        ParseClient.sharedInstance.getStudentLocations(){
+            (data, error) in
+            guard error != nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            // TODO: abstract away code that converts json data into student array
+            // this task will be used in diffrent classes
+            // create helper class 
+            // this shouldn't be done in client class because 
+            // it's coupling the model with the client
+            
+            guard let data = data as? [String: Any] else {
+                return
+            }
+            
+            guard let studentDataArray = data[StudentConstants.Keys.retults] as? [[String: Any]] else {
+                return
+            }
+            
+            var students = [StudentLocation]()
+            
+            for studentDic in studentDataArray{
+                if let student = StudentLocation(dictionary: studentDic){
+                    students.append(student)
+                }
+            }
+            
+            for i in students {
+                print(i)
+            }
+            
+        }
+        
+    }
+    
+    // MARK: - Target Action
     
     @IBAction func didPressLogout(_ sender: UIBarButtonItem) {
         UdacityClient.sharedInstance.logout()
