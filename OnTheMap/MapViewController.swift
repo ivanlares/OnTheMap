@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController{
+class MapViewController: UIViewController, StudentDataDownloader{
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -22,30 +22,8 @@ class MapViewController: UIViewController{
                 return
             }
             
-            // TODO: abstract away code that converts json data into student array
-            // this task will be used in diffrent classes
-            // create helper class 
-            // this shouldn't be done in client class because 
-            // it's coupling the model with the client
-            
-            guard let data = data as? [String: Any] else {
-                return
-            }
-            
-            guard let studentDataArray = data[StudentConstants.Keys.retults] as? [[String: Any]] else {
-                return
-            }
-            
-            var students = [StudentLocation]()
-            
-            for studentDic in studentDataArray{
-                if let student = StudentLocation(dictionary: studentDic){
-                    students.append(student)
-                }
-            }
-            
-            for i in students {
-                print(i)
+            if let studentData = self.convert(studentData: data){
+                SharedData.sharedInstance.studentLocations = studentData
             }
             
         }

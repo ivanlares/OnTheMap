@@ -14,6 +14,7 @@
 		EA8047601E29E0740051FEFB /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA80475F1E29E0740051FEFB /* SharedData.swift */; };
 		EA8047621E29E0A10051FEFB /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8047611E29E0A10051FEFB /* StudentLocation.swift */; };
 		EA8047641E29E9B50051FEFB /* StudentConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8047631E29E9B50051FEFB /* StudentConstants.swift */; };
+		EA8047661E2ADA3E0051FEFB /* StudentLocationDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8047651E2ADA3E0051FEFB /* StudentLocationDownloader.swift */; };
 		EAE8163F1E20977B00AC4406 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE8163E1E20977B00AC4406 /* AppDelegate.swift */; };
 		EAE816441E20977B00AC4406 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAE816421E20977B00AC4406 /* Main.storyboard */; };
 		EAE816461E20977B00AC4406 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE816451E20977B00AC4406 /* Assets.xcassets */; };
@@ -31,6 +32,7 @@
 		EA80475F1E29E0740051FEFB /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		EA8047611E29E0A10051FEFB /* StudentLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
 		EA8047631E29E9B50051FEFB /* StudentConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentConstants.swift; sourceTree = "<group>"; };
+		EA8047651E2ADA3E0051FEFB /* StudentLocationDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocationDownloader.swift; sourceTree = "<group>"; };
 		EAE8163B1E20977B00AC4406 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE8163E1E20977B00AC4406 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAE816431E20977B00AC4406 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			children = (
 				EAE8165A1E20AF6100AC4406 /* LoginViewController.swift */,
 				EA4C01661E2730A400CB907D /* MapViewController.swift */,
+				EA8047651E2ADA3E0051FEFB /* StudentLocationDownloader.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				EA04BC2A1E235272001DDCC2 /* UdacityClientConstants.swift in Sources */,
 				EA4C01671E2730A400CB907D /* MapViewController.swift in Sources */,
 				EAE8163F1E20977B00AC4406 /* AppDelegate.swift in Sources */,
+				EA8047661E2ADA3E0051FEFB /* StudentLocationDownloader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
