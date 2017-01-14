@@ -23,9 +23,11 @@ class MapViewController: UIViewController, StudentDataDownloader{
             }
             
             if let studentData = self.convert(studentData: data){
-                SharedData.sharedInstance.studentLocations = studentData
+                performOnMain(){
+                    SharedData.sharedInstance.studentLocations = studentData
+                    print(SharedData.sharedInstance.studentLocations)
+                }
             }
-            
         }
         
     }
