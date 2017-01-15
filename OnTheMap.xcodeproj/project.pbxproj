@@ -16,6 +16,8 @@
 		EA8047641E29E9B50051FEFB /* StudentConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8047631E29E9B50051FEFB /* StudentConstants.swift */; };
 		EA8047661E2ADA3E0051FEFB /* StudentLocationDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8047651E2ADA3E0051FEFB /* StudentLocationDownloader.swift */; };
 		EA8047681E2AE15B0051FEFB /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8047671E2AE15B0051FEFB /* GCDBlackBox.swift */; };
+		EA80476B1E2BBC5E0051FEFB /* InputLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA80476A1E2BBC5E0051FEFB /* InputLocationViewController.swift */; };
+		EA80476D1E2BBC7E0051FEFB /* InputUrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA80476C1E2BBC7E0051FEFB /* InputUrlViewController.swift */; };
 		EAE8163F1E20977B00AC4406 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE8163E1E20977B00AC4406 /* AppDelegate.swift */; };
 		EAE816441E20977B00AC4406 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAE816421E20977B00AC4406 /* Main.storyboard */; };
 		EAE816461E20977B00AC4406 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE816451E20977B00AC4406 /* Assets.xcassets */; };
@@ -35,6 +37,8 @@
 		EA8047631E29E9B50051FEFB /* StudentConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentConstants.swift; sourceTree = "<group>"; };
 		EA8047651E2ADA3E0051FEFB /* StudentLocationDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocationDownloader.swift; sourceTree = "<group>"; };
 		EA8047671E2AE15B0051FEFB /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
+		EA80476A1E2BBC5E0051FEFB /* InputLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputLocationViewController.swift; sourceTree = "<group>"; };
+		EA80476C1E2BBC7E0051FEFB /* InputUrlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputUrlViewController.swift; sourceTree = "<group>"; };
 		EAE8163B1E20977B00AC4406 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE8163E1E20977B00AC4406 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAE816431E20977B00AC4406 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -138,6 +142,8 @@
 				EAE8165A1E20AF6100AC4406 /* LoginViewController.swift */,
 				EA4C01661E2730A400CB907D /* MapViewController.swift */,
 				EA8047651E2ADA3E0051FEFB /* StudentLocationDownloader.swift */,
+				EA80476A1E2BBC5E0051FEFB /* InputLocationViewController.swift */,
+				EA80476C1E2BBC7E0051FEFB /* InputUrlViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -236,6 +242,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA8047621E29E0A10051FEFB /* StudentLocation.swift in Sources */,
+				EA80476D1E2BBC7E0051FEFB /* InputUrlViewController.swift in Sources */,
+				EA80476B1E2BBC5E0051FEFB /* InputLocationViewController.swift in Sources */,
 				EA8047641E29E9B50051FEFB /* StudentConstants.swift in Sources */,
 				EA4C016D1E274F3A00CB907D /* ParseClientConstants.swift in Sources */,
 				EA4C016B1E274CA900CB907D /* ParseClient.swift in Sources */,
