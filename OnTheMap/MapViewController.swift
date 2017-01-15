@@ -46,6 +46,13 @@ class MapViewController: UIViewController, StudentDataDownloader{
         self.dismiss(animated: false, completion: nil)
     }
     
+    @IBAction func didPressRefresh(_ sender: UIBarButtonItem) {
+    }
+    
+    @IBAction func didPressAddPin(_ sender: UIBarButtonItem) {
+    }
+    
+    
     // MARK: Helper
     
     /// removes current annotations and

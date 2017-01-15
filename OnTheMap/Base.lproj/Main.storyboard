@@ -127,8 +127,16 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="cA8-cB-8eG"/>
-                            <barButtonItem systemItem="refresh" id="eGP-W2-4gv"/>
+                            <barButtonItem systemItem="add" id="cA8-cB-8eG">
+                                <connections>
+                                    <action selector="didPressAddPin:" destination="muj-qP-VQz" id="c9e-vm-30K"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="refresh" id="eGP-W2-4gv">
+                                <connections>
+                                    <action selector="didPressRefresh:" destination="muj-qP-VQz" id="RCa-0T-Avq"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
