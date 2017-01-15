@@ -25,7 +25,7 @@ class UdacityClient{
         - Parameter result: the resulting object if request is successful
         - Parameter error: the resulting error if request was unsuccessful
     */
-    func performPost(method: String, withJsonBody body: [String:AnyObject], completionHandler: @escaping(_ result: AnyObject?, _ error: Error?) -> Void){
+    func performPost(method: String, withJsonBody body: [String:Any], completionHandler: @escaping(_ result: AnyObject?, _ error: Error?) -> Void){
         
         // configure request
         let urlString = Url.base + method
@@ -125,7 +125,33 @@ class UdacityClient{
         }
     }
     
-    
+    /**
+    */
+    func post(studentData: [String:Any], completion: @escaping (_ objectId: String?, _ error: Error?) -> Void){
+        // perform post method with student data
+        performPost(method: Methods.session, withJsonBody: studentData){ result, error in
+            // Error handling
+            guard error == nil else {
+                completion(nil, error)
+                return
+            }
+            // check if the server returned an error
+            if let errorString = result?[JsonKeys.error] as? String, let errorCode = result?[JsonKeys.status] as? Int{
+                completion(nil, NSError(domain: "com.laresivan.onthemap", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorString]))
+                return
+            }
+            
+            // used when there is an error accessing the results
+            let unexpectedError = NSError(domain: "Unexpected", code: 0, userInfo: nil)
+            // get object id
+            if let objectId = result?["objectId"] as? String{
+                completion(objectId, nil)
+            } else {
+                completion(nil, unexpectedError)
+            }
+        }
+    }
+
     // MARK: Helper
     
     /**
@@ -146,6 +172,8 @@ class UdacityClient{
             completionHandler(nil, error)
         }
     }
+    
+
     
     // MARK: OTHER 
     
