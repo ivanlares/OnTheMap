@@ -25,6 +25,8 @@ class InputUrlViewController: UIViewController {
         guard let lat = locationData?.coordinate.latitude, let lon = locationData?.coordinate.longitude, let locationDescription = locationData?.description else{
             return
         }
+        
+        // let jsonBody: [String:Any]
     }
     
     @IBAction func didPressCancel(_ sender: UIBarButtonItem) {

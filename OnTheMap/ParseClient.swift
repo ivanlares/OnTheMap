@@ -35,7 +35,44 @@ class ParseClient{
             }
             
             if let data = data {
-                ParseClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+                ParseClient.parse(jsonData: data, completionHandler: completionHandler)
+            } else {
+                completionHandler(nil, NSError(domain: "com.laresivan.onthemap", code: 0, userInfo: nil))
+                return
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func performPost(withJsonBody body: [String:Any], completionHandler: @escaping(_ result: AnyObject?, _ error: Error?) -> Void){
+        // configure request
+        let urlString = Url.base
+        let url = URL(string: urlString)!
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // append serialized json body to request
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body, options: JSONSerialization.WritingOptions())
+        }
+        catch let error as NSError {
+            completionHandler(nil, error)
+            return
+        }
+        
+        // run request
+        let task = URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
+            
+            if let error = error {
+                completionHandler(nil, error)
+                return
+            }
+            
+            if let data = data {
+                ParseClient.parse(jsonData: data, completionHandler: completionHandler)
             } else {
                 completionHandler(nil, NSError(domain: "com.laresivan.onthemap", code: 0, userInfo: nil))
                 return
@@ -58,23 +95,22 @@ class ParseClient{
         }
     }
     
-    /**
     func post(studentData: [String:Any], completion: @escaping (_ objectId: String?, _ error: Error?) -> Void){
         // perform post method with student data
-        performPost(method: Methods.session, withJsonBody: studentData){ result, error in
+        performPost(withJsonBody: studentData){ result, error in
             // Error handling
             guard error == nil else {
                 completion(nil, error)
                 return
             }
             // check if the server returned an error
-            if let errorString = result?[JsonKeys.error] as? String, let errorCode = result?[JsonKeys.status] as? Int{
+            if let errorString = result?["error"] as? String, let errorCode = result?["code"] as? Int{
                 completion(nil, NSError(domain: "com.laresivan.onthemap", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorString]))
                 return
             }
-            
             // used when there is an error accessing the results
             let unexpectedError = NSError(domain: "Unexpected", code: 0, userInfo: nil)
+            
             // get object id
             if let objectId = result?["objectId"] as? String{
                 completion(objectId, nil)
@@ -83,15 +119,15 @@ class ParseClient{
             }
         }
     }
-     */
+     
     
     // MARK: Helper
     
-    class func parseJSONWithCompletionHandler(_ data: Data, completionHandler: @escaping (_ result: AnyObject?, _ error: Error?) -> Void) {
+    class func parse(jsonData: Data, completionHandler: @escaping (_ result: AnyObject?, _ error: Error?) -> Void) {
         var parsedResult: Any? = nil
         
         do {
-            parsedResult = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
+            parsedResult = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.allowFragments)
         }
         catch let error as NSError {
             completionHandler(nil, error)
