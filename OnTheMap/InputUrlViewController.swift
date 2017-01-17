@@ -26,7 +26,11 @@ class InputUrlViewController: UIViewController {
             return
         }
         
-        // let jsonBody: [String:Any]
+        let jsonBody: [String:Any] = ["uniqueKey":"", "firstName":"",
+                                      "lastName":"", "mapString":"",
+                                      "mediaURL":"", "latitude":Float(),
+                                      "longitude":Float()]
+
     }
     
     @IBAction func didPressCancel(_ sender: UIBarButtonItem) {
