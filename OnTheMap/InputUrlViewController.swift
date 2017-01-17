@@ -11,26 +11,31 @@ import MapKit
 
 class InputUrlViewController: UIViewController {
 
+    @IBOutlet weak var websiteTextField: UITextField!
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var submitButton: UIButton!
+    var locationData: LocationData?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        websiteTextField.delegate = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func didPressSubmit(_ sender: UIButton) {
+        guard let lat = locationData?.coordinate.latitude, let lon = locationData?.coordinate.longitude, let locationDescription = locationData?.description else{
+            return
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func didPressCancel(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
     }
-    */
 
+}
+
+extension InputUrlViewController: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
 }

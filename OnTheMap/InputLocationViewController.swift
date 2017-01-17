@@ -7,29 +7,108 @@
 //
 
 import UIKit
+import CoreLocation
+
+typealias LocationData =
+    (coordinate:CLLocationCoordinate2D, description:String)
 
 class InputLocationViewController: UIViewController {
 
+    @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var nextButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        locationTextField.delegate = self
+        nextButton.isEnabled = false
+        nextButton.alpha = 0.5
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: Target Action 
+    
+    @IBAction func didPressNext(_ sender: UIButton) {
+        guard let locationString = locationTextField.text else {
+            return
+        }
+        
+        find(location: locationString){ (coordinate, error) in
+            // Handle error
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            guard let coordinate = coordinate else {
+                print("Unexpected error, unable to find location")
+                return
+            }
+            
+            // perform segue
+            performOnMain {
+                self.performSegue(withIdentifier: "SubmitSegue", sender: (coordinate: coordinate, location: locationString))
+            }
+        }
     }
-    */
+    
+    @IBAction func didPressCancel(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: Helper
+    
+    func find(location: String, completionHandler: @escaping (_ coordinate:CLLocationCoordinate2D?, _ error: Error?) -> Void){
+        // geocode with location string
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(location){ placemarks,error in
+            // Error handling
+            guard error == nil else{
+                completionHandler(nil, error)
+                return
+            }
+            let noMatchesError =
+                NSError(domain: "com.laresivan.onthemap", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to find any matches"])
+            guard let placemarks = placemarks, !placemarks.isEmpty else {
+                completionHandler(nil, noMatchesError)
+                return
+            }
+            guard let placemark = placemarks.first else{
+                completionHandler(nil, noMatchesError)
+                return 
+            }
+            guard let location = placemark.location else{
+                completionHandler(nil, noMatchesError)
+                return
+            }
+            
+            // retrive coordinates of location
+            completionHandler(location.coordinate, nil)
+        }
+    }
+    
+     // MARK: - Navigation
+    
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let data = sender as? LocationData else{
+          return
+        }
 
+        if let inputLocationController = segue.destination as? InputUrlViewController{
+            inputLocationController.locationData = data
+        }
+     }
+}
+
+extension InputLocationViewController: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let text = textField.text, !text.isEmpty{
+            nextButton.isEnabled = true
+            nextButton.alpha = 1
+            return
+        }
+        nextButton.isEnabled = false
+    }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Wh-jt-XLn">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -180,6 +180,9 @@
                                 <state key="normal" title="Next">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="didPressNext:" destination="qIb-fn-ztF" eventType="touchUpInside" id="Ef6-rU-cmi"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.2470588235" green="0.66274509800000003" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -196,15 +199,21 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dOD-Dq-kcL">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="abI-Uk-xIp"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="abI-Uk-xIp">
+                            <connections>
+                                <action selector="didPressCancel:" destination="qIb-fn-ztF" id="68H-5G-wRM"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="vDM-zi-JvI" kind="show" action="showDetailViewController:sender:" id="Qp1-uX-Dsg"/>
+                        <outlet property="locationTextField" destination="zwe-A9-FTl" id="CrX-Fu-Vta"/>
+                        <outlet property="nextButton" destination="ksC-bZ-7BL" id="gJ2-Sm-cxT"/>
+                        <segue destination="vDM-zi-JvI" kind="show" identifier="SubmitSegue" id="dpd-17-EoG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hiq-rE-OOC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4934" y="139"/>
+            <point key="canvasLocation" x="4910" y="139"/>
         </scene>
         <!--Input Url View Controller-->
         <scene sceneID="pVL-yG-g24">
@@ -239,6 +248,9 @@
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="didPressSubmit:" destination="vDM-zi-JvI" eventType="touchUpInside" id="q9v-gP-jqq"/>
+                                </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="lKL-gy-xjw">
                                 <rect key="frame" x="16" y="185" width="343" height="432"/>
@@ -262,12 +274,21 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xfU-KA-4Vn">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="dun-Qr-wr2"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="dun-Qr-wr2">
+                            <connections>
+                                <action selector="didPressCancel:" destination="vDM-zi-JvI" id="5xc-bw-kVt"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="lKL-gy-xjw" id="f65-wP-foT"/>
+                        <outlet property="submitButton" destination="AOr-pZ-ry0" id="oCT-Wt-qHA"/>
+                        <outlet property="websiteTextField" destination="lLc-cQ-y9i" id="EfD-9Y-GUT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="POm-y0-77Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5663" y="139"/>
+            <point key="canvasLocation" x="5660" y="130"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="bSk-x7-I87">
@@ -336,7 +357,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="qIb-fn-ztF" kind="relationship" relationship="rootViewController" id="nDR-tx-Kb7"/>
+                        <segue destination="qIb-fn-ztF" kind="relationship" relationship="rootViewController" id="367-Y7-aLb"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aM7-WX-35v" userLabel="First Responder" sceneMemberID="firstResponder"/>
