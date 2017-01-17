@@ -58,6 +58,33 @@ class ParseClient{
         }
     }
     
+    /**
+    func post(studentData: [String:Any], completion: @escaping (_ objectId: String?, _ error: Error?) -> Void){
+        // perform post method with student data
+        performPost(method: Methods.session, withJsonBody: studentData){ result, error in
+            // Error handling
+            guard error == nil else {
+                completion(nil, error)
+                return
+            }
+            // check if the server returned an error
+            if let errorString = result?[JsonKeys.error] as? String, let errorCode = result?[JsonKeys.status] as? Int{
+                completion(nil, NSError(domain: "com.laresivan.onthemap", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorString]))
+                return
+            }
+            
+            // used when there is an error accessing the results
+            let unexpectedError = NSError(domain: "Unexpected", code: 0, userInfo: nil)
+            // get object id
+            if let objectId = result?["objectId"] as? String{
+                completion(objectId, nil)
+            } else {
+                completion(nil, unexpectedError)
+            }
+        }
+    }
+     */
+    
     // MARK: Helper
     
     class func parseJSONWithCompletionHandler(_ data: Data, completionHandler: @escaping (_ result: AnyObject?, _ error: Error?) -> Void) {
