@@ -8,15 +8,18 @@
 
 import Foundation
 
+/// Representation of Parse `StudentLocation` object
 struct StudentLocation{
     
-    var objectId: String
-    var latitude: Float
-    var longitude: Float
-    var mediaUrl: String
+    /// Object id provided by the Parse API
+    var objectId: String?
+    var latitude: Float?
+    var longitude: Float?
+    var mediaUrl: String?
     var firstName: String
     var lastName: String
-    var mapString: String
+    var mapString: String?
+    /// String value used for identification
     var uniqueKey: String
     
     init?(dictionary: [String:Any]) {
@@ -39,6 +42,12 @@ struct StudentLocation{
         self.lastName = lastName
         self.mapString = mapString
         self.uniqueKey = uniqueKey
+    }
+    
+    init(uniqueKey: String, firstName: String, lastName: String){
+        self.uniqueKey = uniqueKey
+        self.firstName = firstName
+        self.lastName = lastName
     }
     
 }
