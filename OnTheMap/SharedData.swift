@@ -12,6 +12,7 @@ class SharedData{
     
     static let sharedInstance = SharedData()
     var studentLocations: [StudentLocation] = []
+    var currentUser: UdacityUser?
     
     private init() {}
 }
