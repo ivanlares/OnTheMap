@@ -19,16 +19,18 @@ class UdacityClient{
     /**
         Performs an http post request with the following parameters
      
-        - Parameter method: `String` representation of the method used in the url request
+        - Parameter path: Aditional path components appended to the base url.
+            - Aditional values are appended with foward-slash.
+            - Example: resources/users
         - Parameter body: `Dictionary` representation of the json body used in the url request
         - Parameter completionHandler: closure to execute when request is complete
         - Parameter result: the resulting object if request is successful
         - Parameter error: the resulting error if request was unsuccessful
     */
-    func performPost(method: String, withJsonBody body: [String:Any], completionHandler: @escaping(_ result: AnyObject?, _ error: Error?) -> Void){
+    func performPost(withPath path: String, jsonBody body: [String:Any], completionHandler: @escaping(_ result: AnyObject?, _ error: Error?) -> Void){
         
         // configure request
-        let urlString = Url.base + method
+        let urlString = Url.base + path
         let url = URL(string: urlString)!
         let request = NSMutableURLRequest(url: url)
         request.httpMethod = "POST"
@@ -65,6 +67,43 @@ class UdacityClient{
         task.resume()
     }
     
+    /**
+     Performs Get request
+     - Parameter path: Aditional path components appended to the base url
+        - Aditional values are appended with foward-slash.
+        - Example: resources/users
+     */
+    func performGet(withPath path: String, completionHandler: @escaping (_ result: Any?, _ error: Error?) -> Void) {
+        
+        // configure request
+        let urlString = Url.base + path
+        let url = URL(string: urlString)!
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let task = URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
+            
+            if let error = error {
+                completionHandler(nil, error)
+                return
+            }
+            
+            if let data = data {
+                UdacityClient.parse(jsonData: data, completionHandler: completionHandler)
+            } else {
+                completionHandler(nil, NSError(domain: "com.laresivan.onthemap", code: 0, userInfo: nil))
+                return
+            }
+        }
+        
+        task.resume()
+        
+    }
+
+    
+    
     // MARK: Convenience Methods
     
     /**
@@ -84,7 +123,7 @@ class UdacityClient{
             ]
         ]
         
-        performPost(method: Methods.session, withJsonBody: jsonBody as [String:AnyObject]) { result, error in
+        performPost(withPath: PathKeys.session, jsonBody: jsonBody as [String:AnyObject]) { result, error in
             
             // check if performPost returned an error
             guard error == nil else {
@@ -123,6 +162,32 @@ class UdacityClient{
             self.sessionId = sessionId
             completionHandler(true, nil)
         }
+    }
+    
+    func getStudentData(withUserId id: String){
+        guard let userKey = userKey else { return }
+        let path = PathKeys.users+"/"+userKey
+        
+        performGet(withPath: path){ (results: Any?, error: Error?) in
+            if let results = results{
+                print(results)
+            }
+        }
+        
+        // Example url request
+        /*
+         let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/users/3903878747")!)
+         let session = URLSession.shared
+         let task = session.dataTask(with: request as URLRequest) { data, response, error in
+         if error != nil { // Handle error...
+         return
+         }
+         let range = Range(uncheckedBounds: (5, data!.count - 5))
+         let newData = data?.subdata(in: range) /* subset response data! */
+         print(NSString(data: newData!, encoding: String.Encoding.utf8.rawValue)!)
+         }
+         task.resume()
+        */
     }
     
     // MARK: Helper

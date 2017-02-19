@@ -51,12 +51,19 @@ class LoginViewController: UIViewController{
     }
     
     func login(){
-        UdacityClient.sharedInstance.loginWith(username: emailTextField.text!, password: passwordTextField.text!){ success, error in
+        let udacityClient = UdacityClient.sharedInstance
+        
+        udacityClient.loginWith(username: emailTextField.text!, password: passwordTextField.text!){ success, error in
             if success{
-                DispatchQueue.main.async {
-                    self.transitonToStudentData()
+                guard let userId = udacityClient.userKey else {
+                    print("unable to get student data")
                     return
                 }
+                
+                // TODO: Create a method that returns the students name
+                // this was simply a test
+                udacityClient.getStudentData(withUserId: userId)
+                
             }
         }
     }

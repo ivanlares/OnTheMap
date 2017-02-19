@@ -32,8 +32,9 @@ extension UdacityClient{
         static let status = "status"
     }
     
-    struct Methods {
+    struct PathKeys {
         static let session = "session"
+        static let users = "users"
     }
     
 }
