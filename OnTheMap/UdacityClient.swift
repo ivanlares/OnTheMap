@@ -164,30 +164,27 @@ class UdacityClient{
         }
     }
     
-    func getStudentData(withUserId id: String){
+    func getStudentName(withUserId id: String, completion: @escaping (_ firstName: String?, _ lastName: String?, _ error: Error?) -> Void){
         guard let userKey = userKey else { return }
         let path = PathKeys.users+"/"+userKey
         
         performGet(withPath: path){ (results: Any?, error: Error?) in
-            if let results = results{
-                print(results)
+            // Handle errors
+            guard error == nil else{
+                completion(nil, nil, error)
+                return
             }
+            guard
+                let results = results as? [String:Any],
+                let studentData = results[JsonKeys.user] as? [String: Any],
+                let firstName = studentData[JsonKeys.firstName] as? String,
+                let lastName = studentData[JsonKeys.lastName] as? String else {
+                    completion(nil, nil, NSError(domain: "com.laresivan.onthemap", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to retrieve user data."]))
+                    return
+            }
+            
+            completion(firstName, lastName, nil)
         }
-        
-        // Example url request
-        /*
-         let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/users/3903878747")!)
-         let session = URLSession.shared
-         let task = session.dataTask(with: request as URLRequest) { data, response, error in
-         if error != nil { // Handle error...
-         return
-         }
-         let range = Range(uncheckedBounds: (5, data!.count - 5))
-         let newData = data?.subdata(in: range) /* subset response data! */
-         print(NSString(data: newData!, encoding: String.Encoding.utf8.rawValue)!)
-         }
-         task.resume()
-        */
     }
     
     // MARK: Helper

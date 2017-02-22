@@ -53,6 +53,8 @@ class LoginViewController: UIViewController{
     func login(){
         let udacityClient = UdacityClient.sharedInstance
         
+        // TODO: modify loginWith, 
+        // completionHandler should return userId
         udacityClient.loginWith(username: emailTextField.text!, password: passwordTextField.text!){ success, error in
             if success{
                 guard let userId = udacityClient.userKey else {
@@ -60,10 +62,13 @@ class LoginViewController: UIViewController{
                     return
                 }
                 
-                // TODO: Create a method that returns the students name
-                // this was simply a test
-                udacityClient.getStudentData(withUserId: userId)
-                
+                udacityClient.getStudentName(withUserId: userId){
+                    (firstName, lastName, error) in
+                    guard error == nil else {
+                        print(error!.localizedDescription)
+                        return
+                    }
+                }
             }
         }
     }
