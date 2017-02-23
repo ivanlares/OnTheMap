@@ -9,7 +9,7 @@
 import Foundation
 
 struct UdacityUser{
-    var userKey: String?
-    var firstName: String?
-    var lastName: String?
+    var userKey: String
+    var firstName: String
+    var lastName: String
 }

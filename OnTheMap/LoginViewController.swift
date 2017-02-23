@@ -53,27 +53,32 @@ class LoginViewController: UIViewController{
     func login(){
         let udacityClient = UdacityClient.sharedInstance
         
-        // TODO: modify loginWith, 
-        // completionHandler should return userId
-        udacityClient.loginWith(username: emailTextField.text!, password: passwordTextField.text!){ success, error in
-            if success{
-                guard let userId = udacityClient.userKey else {
-                    print("unable to get student data")
+        udacityClient.loginWith(username: emailTextField.text!, password: passwordTextField.text!){ userId, error in
+            guard error == nil else {
+                print(error!)
+                return
+            }
+            guard let userId = userId else {
+                return
+            }
+            udacityClient.getStudentName(withUserId: userId){
+                (firstName, lastName, error) in
+                guard error == nil else {
+                    print(error!.localizedDescription)
                     return
                 }
-                
-                udacityClient.getStudentName(withUserId: userId){
-                    (firstName, lastName, error) in
-                    guard error == nil else {
-                        print(error!.localizedDescription)
-                        return
-                    }
+                guard let firstName = firstName, let lastName = lastName else{
+                    return
+                }
+                performOnMain {
+                    SharedData.sharedInstance.currentUser = UdacityUser(userKey: userId, firstName: firstName, lastName: lastName)
+                    self.transitionToStudentData()
                 }
             }
         }
     }
     
-    func transitonToStudentData(){
+    func transitionToStudentData(){
         emailTextField.text = nil
         passwordTextField.text = nil
 

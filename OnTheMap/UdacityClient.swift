@@ -114,7 +114,7 @@ class UdacityClient{
      - Parameter success: true if login was successful
      - Parameter error: returns an error if login was not successful
      */
-    func loginWith(username: String, password: String, completionHandler: @escaping (_ success: Bool, _ error: Error?) -> Void) {
+    func loginWith(username: String, password: String, completionHandler: @escaping (_ userId: String?, _ error: Error?) -> Void) {
         
         let jsonBody: [String:Any] = [
             JsonKeys.loginCredentials: [
@@ -127,12 +127,12 @@ class UdacityClient{
             
             // check if performPost returned an error
             guard error == nil else {
-                completionHandler(false, error)
+                completionHandler(nil, error)
                 return
             }
             // check if the server returned an error
             if let errorString = result?[JsonKeys.error] as? String, let errorCode = result?[JsonKeys.status] as? Int{
-                completionHandler(false, NSError(domain: "com.laresivan.onthemap", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorString]))
+                completionHandler(nil, NSError(domain: "com.laresivan.onthemap", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorString]))
                 return
             }
             
@@ -141,26 +141,26 @@ class UdacityClient{
             
             // get userKey from results
             guard let userData = result?[JsonKeys.account] as? NSDictionary else {
-                completionHandler(false, unexpectedError)
+                completionHandler(nil, unexpectedError)
                 return
             }
             guard let userKey = userData[JsonKeys.userKey] as? String else {
-                completionHandler(false, unexpectedError)
+                completionHandler(nil, unexpectedError)
                 return
             }
             self.userKey = userKey
             
             // get sessionId from results
             guard let sessionResults = result?[JsonKeys.session] as? NSDictionary else {
-                completionHandler(false, unexpectedError)
+                completionHandler(nil, unexpectedError)
                 return
             }
             guard let sessionId = sessionResults[JsonKeys.sessionID] as? String else {
-                completionHandler(false, unexpectedError)
+                completionHandler(nil, unexpectedError)
                 return
             }
             self.sessionId = sessionId
-            completionHandler(true, nil)
+            completionHandler(userKey, nil)
         }
     }
     
