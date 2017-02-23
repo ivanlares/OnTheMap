@@ -59,6 +59,7 @@ class LoginViewController: UIViewController{
                 return
             }
             guard let userId = userId else {
+                print(LoginError.UnableToRetrieveUserData.localizedDescription)
                 return
             }
             udacityClient.getStudentName(withUserId: userId){
@@ -68,6 +69,7 @@ class LoginViewController: UIViewController{
                     return
                 }
                 guard let firstName = firstName, let lastName = lastName else{
+                    print(LoginError.UnableToRetrieveUserData.localizedDescription)
                     return
                 }
                 performOnMain {
