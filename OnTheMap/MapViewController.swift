@@ -50,6 +50,8 @@ class MapViewController: UIViewController, StudentDataDownloader{
     }
     
     @IBAction func didPressAddPin(_ sender: UIBarButtonItem) {
+        let postDataNavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PostDataNavigationController")
+        present(postDataNavigationController, animated: true, completion: nil)
     }
     
     
