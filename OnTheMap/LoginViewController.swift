@@ -74,13 +74,13 @@ class LoginViewController: UIViewController{
                 }
                 performOnMain {
                     SharedData.sharedInstance.currentUser = UdacityUser(userKey: userId, firstName: firstName, lastName: lastName)
-                    self.transitionToStudentData()
+                    self.presentTabController()
                 }
             }
         }
     }
     
-    func transitionToStudentData(){
+    func presentTabController(){
         emailTextField.text = nil
         passwordTextField.text = nil
 
