@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, StudentDataDownloader{
+class MapViewController: UIViewController, StudentDataConverter{
     
     @IBOutlet weak var mapView: MKMapView!
     

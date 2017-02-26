@@ -62,6 +62,7 @@ class LoginViewController: UIViewController{
                 print(LoginError.UnableToRetrieveUserData.localizedDescription)
                 return
             }
+            // TODO: Move get student name logic into login client method
             udacityClient.getStudentName(withUserId: userId){
                 (firstName, lastName, error) in
                 guard error == nil else {

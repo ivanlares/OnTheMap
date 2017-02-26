@@ -8,18 +8,24 @@
 
 import Foundation
 
-protocol StudentDataDownloader{
+
+protocol StudentDataConverter{
+    associatedtype ConversionType
     /**
-     Converts student json data into a
-     usable array of `StudentLocation` by default.
+     Converts student json data of type `Any?`
+     into associatedtype `DataType?`.
      
      - Parameter studentData: student json data of type `Any?`.
      */
-    func convert(studentData: Any?) -> [StudentLocation]?
+    func convert(studentData: Any?) -> ConversionType?
 }
 
-extension StudentDataDownloader{
-
+extension StudentDataConverter{
+    /**
+     Converts student json data into '[StrudentLocation]?' by default.
+     
+     - Parameter studentData: student json data of type `Any?`.
+     */
     func convert(studentData: Any?) -> [StudentLocation]?{
         guard let studentData = studentData as? [String: Any] else {
             return nil
