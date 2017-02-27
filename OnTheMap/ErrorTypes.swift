@@ -11,3 +11,8 @@ import Foundation
 enum LoginError: Error {
     case UnableToRetrieveUserData
 }
+enum PostingError{
+    case missingStudentLocation
+    case missingStudentWebsite
+    case missingStudentData
+}

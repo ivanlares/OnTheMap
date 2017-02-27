@@ -22,19 +22,39 @@ class InputUrlViewController: UIViewController {
     }
 
     @IBAction func didPressSubmit(_ sender: UIButton) {
-        guard let lat = locationData?.coordinate.latitude, let lon = locationData?.coordinate.longitude, let locationDescription = locationData?.description else{
-            return
-        }
         
-        let jsonBody: [String:Any] = ["uniqueKey":"", "firstName":"",
-                                      "lastName":"", "mapString":"",
-                                      "mediaURL":"", "latitude":Float(),
-                                      "longitude":Float()]
+
 
     }
     
     @IBAction func didPressCancel(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: Helper
+    
+    func submit(){
+        guard let mediaUrl = websiteTextField.text else {
+            return
+        }
+        guard let lat = locationData?.coordinate.latitude,
+            let lon = locationData?.coordinate.longitude,
+            let locationDescription = locationData?.description else{
+            return
+        }
+        let currentUser = SharedData.sharedInstance.currentUser
+        guard let uniqueKey = currentUser?.userKey,
+            let firstName = currentUser?.firstName,
+            let lastName = currentUser?.lastName else {
+            return
+        }
+        let jsonBody: [String:Any] = ["uniqueKey":uniqueKey,
+                                      "firstName":firstName,
+                                      "lastName":lastName,
+                                      "mapString":locationDescription,
+                                      "mediaURL":mediaUrl,
+                                      "latitude":lat,
+                                      "longitude":lon]
     }
 
 }
