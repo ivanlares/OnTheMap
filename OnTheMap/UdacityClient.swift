@@ -13,6 +13,8 @@ class UdacityClient{
     static let sharedInstance = UdacityClient()
     var sessionId: String?
     var userKey: String?
+    typealias LoginCompletion =
+        ((userKey: String,firstName: String, lastName: String)?, _ error: Error?) -> ()
     
     // MARK: Request Methods 
     
@@ -114,7 +116,7 @@ class UdacityClient{
      - Parameter success: true if login was successful
      - Parameter error: returns an error if login was not successful
      */
-    func loginWith(username: String, password: String, completionHandler: @escaping (_ userId: String?, _ error: Error?) -> Void) {
+    func loginWith(username: String, password: String, completionHandler: @escaping LoginCompletion) {
         
         let jsonBody: [String:Any] = [
             JsonKeys.loginCredentials: [
@@ -123,7 +125,7 @@ class UdacityClient{
             ]
         ]
         
-        performPost(withPath: PathKeys.session, jsonBody: jsonBody as [String:AnyObject]) { result, error in
+        performPost(withPath: PathKeys.session, jsonBody: jsonBody as [String:AnyObject]) { results, error in
             
             // check if performPost returned an error
             guard error == nil else {
@@ -131,47 +133,35 @@ class UdacityClient{
                 return
             }
             // check if the server returned an error
-            if let errorString = result?[JsonKeys.error] as? String, let errorCode = result?[JsonKeys.status] as? Int{
+            if let errorString = results?[JsonKeys.error] as? String, let
+                errorCode = results?[JsonKeys.status] as? Int{
                 completionHandler(nil, NSError(domain: "com.laresivan.onthemap", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorString]))
                 return
             }
-            
-            // used when there is an error accessing the results
-            let unexpectedError = NSError(domain: "Unexpected", code: 0, userInfo: nil)
-            
-            // get userKey from results
-            guard let userData = result?[JsonKeys.account] as? NSDictionary else {
-                completionHandler(nil, unexpectedError)
-                return
-            }
-            guard let userKey = userData[JsonKeys.userKey] as? String else {
-                completionHandler(nil, unexpectedError)
+            // extract data from results
+            guard let userData = results?[JsonKeys.account] as? NSDictionary,
+                let userKey = userData[JsonKeys.userKey] as? String,
+                let sessionResults = results?[JsonKeys.session] as? NSDictionary,
+                let sessionId = sessionResults[JsonKeys.sessionID] as? String
+                else {
+                completionHandler(nil, LoginError.UnableToRetrieveUserData)
                 return
             }
             self.userKey = userKey
-            
-            // get sessionId from results
-            guard let sessionResults = result?[JsonKeys.session] as? NSDictionary else {
-                completionHandler(nil, unexpectedError)
-                return
-            }
-            guard let sessionId = sessionResults[JsonKeys.sessionID] as? String else {
-                completionHandler(nil, unexpectedError)
-                return
-            }
             self.sessionId = sessionId
-            completionHandler(userKey, nil)
+            // Get user Name
+            self.getStudentName(withUserId: userKey, completion: completionHandler)
         }
     }
     
-    func getStudentName(withUserId id: String, completion: @escaping (_ firstName: String?, _ lastName: String?, _ error: Error?) -> Void){
+    func getStudentName(withUserId id: String, completion: @escaping LoginCompletion){
         guard let userKey = userKey else { return }
         let path = PathKeys.users+"/"+userKey
         
         performGet(withPath: path){ (results: Any?, error: Error?) in
             // Handle errors
             guard error == nil else{
-                completion(nil, nil, error)
+                completion(nil, error)
                 return
             }
             guard
@@ -179,11 +169,10 @@ class UdacityClient{
                 let studentData = results[JsonKeys.user] as? [String: Any],
                 let firstName = studentData[JsonKeys.firstName] as? String,
                 let lastName = studentData[JsonKeys.lastName] as? String else {
-                    completion(nil, nil, NSError(domain: "com.laresivan.onthemap", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to retrieve user data."]))
+                    completion(nil, LoginError.UnableToRetrieveUserData)
                     return
             }
-            
-            completion(firstName, lastName, nil)
+            completion((id, firstName, lastName), nil)
         }
     }
     

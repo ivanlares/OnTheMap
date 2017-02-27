@@ -51,32 +51,19 @@ class LoginViewController: UIViewController{
     }
     
     func login(){
-        let udacityClient = UdacityClient.sharedInstance
-        
-        udacityClient.loginWith(username: emailTextField.text!, password: passwordTextField.text!){ userId, error in
+        UdacityClient.sharedInstance.loginWith(username: emailTextField.text!, password: passwordTextField.text!){
+            (userData: (userKey:String,firstName:String,lastName:String)?, error) in
             guard error == nil else {
                 print(error!)
                 return
             }
-            guard let userId = userId else {
-                print(LoginError.UnableToRetrieveUserData.localizedDescription)
+            guard let userData = userData else {
+                print(LoginError.UnableToRetrieveUserData)
                 return
             }
-            // TODO: Move get student name logic into login client method
-            udacityClient.getStudentName(withUserId: userId){
-                (firstName, lastName, error) in
-                guard error == nil else {
-                    print(error!.localizedDescription)
-                    return
-                }
-                guard let firstName = firstName, let lastName = lastName else{
-                    print(LoginError.UnableToRetrieveUserData.localizedDescription)
-                    return
-                }
-                performOnMain {
-                    SharedData.sharedInstance.currentUser = UdacityUser(userKey: userId, firstName: firstName, lastName: lastName)
-                    self.presentTabController()
-                }
+            performOnMain{
+                SharedData.sharedInstance.currentUser = UdacityUser(userKey: userData.userKey, firstName: userData.firstName, lastName: userData.lastName)
+                self.presentTabController()
             }
         }
     }
