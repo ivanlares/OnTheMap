@@ -22,9 +22,7 @@ class InputUrlViewController: UIViewController {
     }
 
     @IBAction func didPressSubmit(_ sender: UIButton) {
-        
-
-
+        submit()
     }
     
     @IBAction func didPressCancel(_ sender: UIBarButtonItem) {
@@ -53,8 +51,12 @@ class InputUrlViewController: UIViewController {
                                       "lastName":lastName,
                                       "mapString":locationDescription,
                                       "mediaURL":mediaUrl,
-                                      "latitude":lat,
-                                      "longitude":lon]
+                                      "latitude":lat as Double,
+                                      "longitude":lon as Double]
+        ParseClient.sharedInstance.post(studentData: jsonBody){
+            (objectId, error) in
+            print((objectId, error?.localizedDescription ?? ""))
+        }
     }
 
 }
