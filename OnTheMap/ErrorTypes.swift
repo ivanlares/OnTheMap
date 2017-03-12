@@ -9,10 +9,13 @@
 import Foundation
 
 enum LoginError: Error {
-    case UnableToRetrieveUserData
+    case unableToRetrieveUserData
 }
-enum PostingError{
+enum ParseApiError: Error{
     case missingStudentLocation
     case missingStudentWebsite
     case missingStudentData
+}
+enum NetworkingError: Error{
+    case parsingError
 }

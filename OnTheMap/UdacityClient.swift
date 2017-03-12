@@ -144,7 +144,7 @@ class UdacityClient{
                 let sessionResults = results?[JsonKeys.session] as? NSDictionary,
                 let sessionId = sessionResults[JsonKeys.sessionID] as? String
                 else {
-                completionHandler(nil, LoginError.UnableToRetrieveUserData)
+                completionHandler(nil, LoginError.unableToRetrieveUserData)
                 return
             }
             self.userKey = userKey
@@ -169,7 +169,7 @@ class UdacityClient{
                 let studentData = results[JsonKeys.user] as? [String: Any],
                 let firstName = studentData[JsonKeys.firstName] as? String,
                 let lastName = studentData[JsonKeys.lastName] as? String else {
-                    completion(nil, LoginError.UnableToRetrieveUserData)
+                    completion(nil, LoginError.unableToRetrieveUserData)
                     return
             }
             completion((id, firstName, lastName), nil)
