@@ -61,7 +61,7 @@ class UdacityClient{
             if let data = data {
                 UdacityClient.parse(jsonData: data, completionHandler: completionHandler)
             } else {
-                completionHandler(nil, NSError(domain: "com.laresivan.onthemap", code: 0, userInfo: nil))
+                completionHandler(nil, NetworkingError.parsingError)
                 return
             }
         }
