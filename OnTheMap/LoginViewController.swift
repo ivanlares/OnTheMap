@@ -58,7 +58,7 @@ class LoginViewController: UIViewController{
                 return
             }
             guard let userData = userData else {
-                print(LoginError.UnableToRetrieveUserData)
+                print(LoginError.unableToRetrieveUserData)
                 return
             }
             performOnMain{

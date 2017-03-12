@@ -61,7 +61,6 @@ class ParseClient{
         // append serialized json body to request
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: body, options: JSONSerialization.WritingOptions())
-            print(request.httpBody)
         }
         catch let error as NSError {
             completionHandler(nil, error)

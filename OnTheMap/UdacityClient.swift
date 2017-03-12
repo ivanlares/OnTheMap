@@ -164,8 +164,19 @@ class UdacityClient{
                 completion(nil, error)
                 return
             }
+            // check for unexpected data types
+            guard let results = results as? [String: Any] else {
+                completion(nil, NetworkingError.unexpectedData)
+                return
+            }
+            // check if the server returned an error
+            if let errorString = results[JsonKeys.error] as? String, let
+                errorCode = results[JsonKeys.status] as? Int{
+                completion(nil, NSError(domain: "com.laresivan.onthemap", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorString]))
+                return
+            }
+            // extract user name
             guard
-                let results = results as? [String:Any],
                 let studentData = results[JsonKeys.user] as? [String: Any],
                 let firstName = studentData[JsonKeys.firstName] as? String,
                 let lastName = studentData[JsonKeys.lastName] as? String else {

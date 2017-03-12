@@ -18,4 +18,5 @@ enum ParseApiError: Error{
 }
 enum NetworkingError: Error{
     case parsingError
+    case unexpectedData
 }
