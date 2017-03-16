@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EA04BC2A1E235272001DDCC2 /* UdacityClientConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA04BC291E235272001DDCC2 /* UdacityClientConstants.swift */; };
+		EA092F381E7A4F12002D92FA /* JsonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA092F371E7A4F12002D92FA /* JsonHelper.swift */; };
 		EA4C01671E2730A400CB907D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4C01661E2730A400CB907D /* MapViewController.swift */; };
 		EA4C016B1E274CA900CB907D /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4C016A1E274CA900CB907D /* ParseClient.swift */; };
 		EA4C016D1E274F3A00CB907D /* ParseClientConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4C016C1E274F3A00CB907D /* ParseClientConstants.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		EA04BC291E235272001DDCC2 /* UdacityClientConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClientConstants.swift; sourceTree = "<group>"; };
+		EA092F371E7A4F12002D92FA /* JsonHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonHelper.swift; sourceTree = "<group>"; };
 		EA4C01661E2730A400CB907D /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		EA4C016A1E274CA900CB907D /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		EA4C016C1E274F3A00CB907D /* ParseClientConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClientConstants.swift; sourceTree = "<group>"; };
@@ -65,6 +67,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EA092F361E7A4EDB002D92FA /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				EA092F371E7A4F12002D92FA /* JsonHelper.swift */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
 		EA4C01681E274C4100CB907D /* Udacity */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +177,7 @@
 		EAE816541E20986D00AC4406 /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				EA092F361E7A4EDB002D92FA /* Helper */,
 				EA4C01691E274C5F00CB907D /* Parse */,
 				EA4C01681E274C4100CB907D /* Udacity */,
 			);
@@ -260,6 +271,7 @@
 				EAE816571E20988000AC4406 /* UdacityClient.swift in Sources */,
 				EA8047601E29E0740051FEFB /* SharedData.swift in Sources */,
 				EA04BC2A1E235272001DDCC2 /* UdacityClientConstants.swift in Sources */,
+				EA092F381E7A4F12002D92FA /* JsonHelper.swift in Sources */,
 				EA4C01671E2730A400CB907D /* MapViewController.swift in Sources */,
 				EAE8163F1E20977B00AC4406 /* AppDelegate.swift in Sources */,
 				EA8047661E2ADA3E0051FEFB /* StudentLocationDownloader.swift in Sources */,
