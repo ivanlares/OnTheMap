@@ -16,9 +16,11 @@ class ParseClient{
     
     // MARK: Request Methods 
   
-    func performGetMethod(withQuery query:[String:Any], completionHandler: @escaping (_ result: Any?, _ error: Error?) -> Void) {
+    func performGetMethod(withQueryItems queryItems:[URLQueryItem], completionHandler: @escaping (_ result: Any?, _ error: Error?) -> Void) {
         // setup url request
-        guard let url = URL(string: Url.base + escapedParameters(parameters: query)) else {
+        guard let queryString = JsonHelper.query(withItems: queryItems),
+            let url = URL(string: Url.base + queryString) else {
+            print("\nUnable to create url: \(#line)")
             return
         }
         let request = NSMutableURLRequest(url: url)
@@ -89,11 +91,9 @@ class ParseClient{
     // MARK: Convenience Methods
     
     func getStudentLocations(completionHandler: @escaping (_ results: Any?, _ error: Error?) -> Void){
-        let queryItems:[String:Any] =
-            [QueryParameters.order:QueryValues.order,
-             QueryParameters.limit:QueryValues.limit]
-        
-        performGetMethod(withQuery: queryItems){
+        let queries =
+            [URLQueryItem(name:QueryParameters.order,value:QueryValues.order), URLQueryItem(name:QueryParameters.limit, value:String(QueryValues.limit))]
+        performGetMethod(withQueryItems: queries){
             (data, error) in
             completionHandler(data, error)
         }
@@ -124,7 +124,6 @@ class ParseClient{
         }
     }
      
-    
     // MARK: Helper
     
     class func parse(jsonData: Data, completionHandler: @escaping (_ result: AnyObject?, _ error: Error?) -> Void) {
@@ -138,26 +137,6 @@ class ParseClient{
         }
         
         completionHandler(parsedResult as AnyObject?, nil)
-    }
-    
-    /**Given a dictionary of parameters,
-     convert to a string for a url */
-    func escapedParameters(parameters: [String : Any]) -> String {
-        var urlVars = [String]()
-        
-        for (key, value) in parameters {
-            //Make sure that it is a string value
-            let stringValue = "\(value)"
-            //Escape it
-    
-            let escapedValue = stringValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-            //Replace spaces with '+'
-            let replaceSpaceValue = escapedValue!.replacingOccurrences(of: " ", with: "+")
-            //Append it
-            urlVars += [key + "=" + "\(replaceSpaceValue)"]
-        }
-        
-        return (!urlVars.isEmpty ? "?" : "") + urlVars.joined(separator: "&")
     }
     
 }
