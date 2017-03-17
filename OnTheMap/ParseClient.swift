@@ -123,7 +123,22 @@ class ParseClient{
             }
         }
     }
-     
+    
+    func getStudents(withObjectIdQuery query: URLQueryItem, completion: @escaping (_ students: [String:Any]?, _ error: Error?) -> Void){
+        performGetMethod(withQueryItems: [query]){
+            (results, error) in
+            guard error == nil else {
+                completion(nil, error!)
+                return
+            }
+            guard let results = results else {
+                completion(nil, ParseApiError.unableToFetchData)
+                return
+            }
+            print("results->\n\(results)\n")
+        }
+    }
+    
     // MARK: Helper
     
     class func parse(jsonData: Data, completionHandler: @escaping (_ result: AnyObject?, _ error: Error?) -> Void) {

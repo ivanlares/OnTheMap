@@ -15,6 +15,7 @@ enum ParseApiError: Error{
     case missingStudentLocation
     case missingStudentWebsite
     case missingStudentData
+    case unableToFetchData
 }
 enum NetworkingError: Error{
     case parsingError
