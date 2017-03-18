@@ -18,12 +18,12 @@ extension ParseClient{
     struct Url{
         static let base =
             "https://parse.udacity.com/parse/classes/StudentLocation"
-        
     }
     
     struct QueryParameters{
         static let order = "order"
         static let limit = "limit"
+        static let whereKey = "where"
     }
     
     struct QueryValues{

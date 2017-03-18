@@ -124,7 +124,7 @@ class ParseClient{
         }
     }
     
-    func getStudents(withObjectIdQuery query: URLQueryItem, completion: @escaping (_ students: [String:Any]?, _ error: Error?) -> Void){
+    func getStudents(withObjectIdQuery query: URLQueryItem, completion: @escaping (_ students: Any?, _ error: Error?) -> Void){
         performGetMethod(withQueryItems: [query]){
             (results, error) in
             guard error == nil else {
@@ -135,7 +135,7 @@ class ParseClient{
                 completion(nil, ParseApiError.unableToFetchData)
                 return
             }
-            print("results->\n\(results)\n")
+            completion(results, nil)
         }
     }
     
