@@ -32,19 +32,12 @@ class InputUrlViewController: UIViewController, StudentDataConverter {
     // MARK: Helper
     
     func submit(){
-        // creates json body for student location
         guard let studentJsonBody = studentJsonBody() else {
             return
         }
-        // creates getStudent query
-        guard let uniqueKey = SharedData.sharedInstance.currentUser?.userKey else {return}
-        let queryObject = ["uniqueKey": uniqueKey]
-        guard let queryValue =
-            try? JsonHelper.convert(object: queryObject) else {
-                return
+        guard let objectIdQuery = self.objectIdQuery() else {
+            return
         }
-        let objectIdQuery =
-            URLQueryItem(name: ParseClient.QueryParameters.whereKey, value: queryValue)
         
         ParseClient.sharedInstance.getStudents(withObjectIdQuery: objectIdQuery){
             (results, error) in
@@ -90,6 +83,21 @@ class InputUrlViewController: UIViewController, StudentDataConverter {
                                       "latitude":lat as Double,
                                       "longitude":lon as Double]
         return jsonBody
+    }
+    
+    /// query used to query for students with uniqueKey
+    func objectIdQuery() -> URLQueryItem?{
+        guard let uniqueKey = SharedData.sharedInstance.currentUser?.userKey else {
+            return nil
+        }
+        let queryObject = ["uniqueKey": uniqueKey]
+        guard let queryValue =
+            try? JsonHelper.convert(object: queryObject) else {
+                return nil
+        }
+        let objectIdQuery =
+            URLQueryItem(name: ParseClient.QueryParameters.whereKey, value: queryValue)
+        return objectIdQuery
     }
 }
 
