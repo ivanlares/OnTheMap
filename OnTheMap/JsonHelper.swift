@@ -41,4 +41,25 @@ struct JsonHelper{
         }
         return nil
     }
+    
+    /**
+        Parses json data and returns a usable foundation object.
+     
+        - Parameter jsonData: Data type
+        - Parameter completionHandler: called when done
+        - Parameter result: AnyObject type
+        - Parameter error: Error type
+    */
+    static func parse(jsonData: Data, completionHandler: @escaping (_ result: AnyObject?, _ error: Error?) -> Void) {
+        var parsedResult: Any? = nil
+        
+        do {
+            parsedResult = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.allowFragments)
+        }
+        catch let error as NSError {
+            completionHandler(nil, error)
+        }
+        
+        completionHandler(parsedResult as AnyObject?, nil)
+    }
 }

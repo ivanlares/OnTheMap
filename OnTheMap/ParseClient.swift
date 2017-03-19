@@ -37,7 +37,7 @@ class ParseClient{
             }
             
             if let data = data {
-                ParseClient.parse(jsonData: data, completionHandler: completionHandler)
+                JsonHelper.parse(jsonData: data, completionHandler: completionHandler)
             } else {
                 completionHandler(nil, NSError(domain: "com.laresivan.onthemap", code: 0, userInfo: nil))
                 return
@@ -78,7 +78,7 @@ class ParseClient{
             }
             
             if let data = data {
-                ParseClient.parse(jsonData: data, completionHandler: completionHandler)
+                JsonHelper.parse(jsonData: data, completionHandler: completionHandler)
             } else {
                 completionHandler(nil, NSError(domain: "com.laresivan.onthemap", code: 0, userInfo: nil))
                 return
@@ -116,7 +116,7 @@ class ParseClient{
             }
             
             if let data = data {
-                ParseClient.parse(jsonData: data, completionHandler: completionHandler)
+                JsonHelper.parse(jsonData: data, completionHandler: completionHandler)
             } else {
                 completionHandler(nil, NSError(domain: "com.laresivan.onthemap", code: 0, userInfo: nil))
                 return
@@ -177,21 +177,6 @@ class ParseClient{
             }
             completion(results, nil)
         }
-    }
-    
-    // MARK: Helper
-    
-    class func parse(jsonData: Data, completionHandler: @escaping (_ result: AnyObject?, _ error: Error?) -> Void) {
-        var parsedResult: Any? = nil
-        
-        do {
-            parsedResult = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.allowFragments)
-        }
-        catch let error as NSError {
-            completionHandler(nil, error)
-        }
-        
-        completionHandler(parsedResult as AnyObject?, nil)
     }
     
 }
