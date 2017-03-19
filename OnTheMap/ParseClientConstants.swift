@@ -28,7 +28,7 @@ extension ParseClient{
     
     struct QueryValues{
         static let order = "-createdAt,-updatedAt"
-        static let limit = 100 
+        static let limit = 100
     }
     
 }

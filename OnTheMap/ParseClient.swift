@@ -14,14 +14,14 @@ class ParseClient{
     
     private init() {}
     
-    // MARK: Request Methods 
-  
+    // MARK: Request Methods
+    
     func performGetMethod(withQueryItems queryItems:[URLQueryItem], completionHandler: @escaping (_ result: Any?, _ error: Error?) -> Void) {
         // setup url request
         guard let queryString = JsonHelper.query(withItems: queryItems),
             let url = URL(string: Url.base + queryString) else {
-            print("\nUnable to create url: \(#line)")
-            return
+                print("\nUnable to create url: \(#line)")
+                return
         }
         let request = NSMutableURLRequest(url: url)
         request.httpMethod = "GET"
@@ -29,7 +29,7 @@ class ParseClient{
         request.addValue(Constants.apiKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        // perform request 
+        // perform request
         let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
             if let error = error {
                 completionHandler(nil, error)
@@ -88,6 +88,44 @@ class ParseClient{
         task.resume()
     }
     
+    func performPut(withJsonBody body: [String:Any], objectId: String, completionHandler: @escaping(_ result: AnyObject?, _ error: Error?) -> Void){
+        guard let url = URL(string: Url.base + "/" + objectId) else {
+            return
+        }
+        
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.addValue(Constants.applicationId, forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue(Constants.apiKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // append serialized json body to request
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+        }
+        catch let error as NSError {
+            completionHandler(nil, error)
+            return
+        }
+        
+        // perform request
+        let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
+            if let error = error {
+                completionHandler(nil, error)
+                return
+            }
+            
+            if let data = data {
+                ParseClient.parse(jsonData: data, completionHandler: completionHandler)
+            } else {
+                completionHandler(nil, NSError(domain: "com.laresivan.onthemap", code: 0, userInfo: nil))
+                return
+            }
+        }
+        
+        task.resume()
+    }
+    
     // MARK: Convenience Methods
     
     func getStudentLocations(completionHandler: @escaping (_ results: Any?, _ error: Error?) -> Void){
@@ -125,7 +163,9 @@ class ParseClient{
     }
     
     func getStudents(withObjectIdQuery query: URLQueryItem, completion: @escaping (_ students: Any?, _ error: Error?) -> Void){
-        performGetMethod(withQueryItems: [query]){
+        let queries =
+            [URLQueryItem(name:QueryParameters.order,value:QueryValues.order), URLQueryItem(name:QueryParameters.limit, value:String(QueryValues.limit)),query]
+        performGetMethod(withQueryItems: queries){
             (results, error) in
             guard error == nil else {
                 completion(nil, error!)

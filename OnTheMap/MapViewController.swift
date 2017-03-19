@@ -67,7 +67,7 @@ class MapViewController: UIViewController, StudentDataConverter{
         var annotations = [MKAnnotation]()
         for student in SharedData.sharedInstance.studentLocations{
             let location =
-                CLLocationCoordinate2D(latitude: CLLocationDegrees(student.latitude!), longitude: CLLocationDegrees(student.longitude!))
+                CLLocationCoordinate2D(latitude: CLLocationDegrees(student.latitude), longitude: CLLocationDegrees(student.longitude))
             let annotation = MKPointAnnotation()
             annotation.coordinate = location
             annotation.title = "\(student.firstName) \(student.lastName)"

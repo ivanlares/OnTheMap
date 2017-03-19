@@ -48,7 +48,16 @@ class InputUrlViewController: UIViewController, StudentDataConverter {
             if let students = self.convert(studentData: results), let student = students.first{
                 // there are students with unique key
                 // use put method to update student data
-                print(student)
+                ParseClient.sharedInstance.performPut(withJsonBody: studentJsonBody, objectId: student.objectId){
+                    (results, error) in
+                    guard error == nil else {
+                        print(error!)
+                        return
+                    }
+                    if let results = results{
+                        print(results)
+                    }
+                }
             } else {
                 // no student locations with unique key
                 // post new student location
