@@ -10,7 +10,8 @@ import UIKit
 import MapKit
 
 class InputUrlViewController: UIViewController, StudentDataConverter {
-
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var websiteTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var submitButton: UIButton!
@@ -22,7 +23,19 @@ class InputUrlViewController: UIViewController, StudentDataConverter {
     }
 
     @IBAction func didPressSubmit(_ sender: UIButton) {
-        submit()
+        activityIndicator.startAnimating()
+        
+        submit(){ error in
+            performOnMain {
+                self.activityIndicator.stopAnimating()
+                if let error = error{
+                    // Show alert
+                    print((error, #line))
+                } else {
+                    self.dismiss(animated: true)
+                }
+            }
+        }
     }
     
     @IBAction func didPressCancel(_ sender: UIBarButtonItem) {
@@ -31,18 +44,20 @@ class InputUrlViewController: UIViewController, StudentDataConverter {
     
     // MARK: Helper
     
-    func submit(){
-        guard let studentJsonBody = studentJsonBody() else {
+    func submit(completion:@escaping (Error?)->Void){
+        guard let studentJsonBody = buildStudentJsonBody() else {
+            completion(nil)
             return
         }
         guard let objectIdQuery = self.objectIdQuery() else {
+            completion(nil)
             return
         }
         
         ParseClient.sharedInstance.getStudents(withObjectIdQuery: objectIdQuery){
             (results, error) in
             guard error == nil else {
-                print(error!)
+                completion(error)
                 return
             }
             if let students = self.convert(studentData: results), let student = students.first{
@@ -51,32 +66,40 @@ class InputUrlViewController: UIViewController, StudentDataConverter {
                 ParseClient.sharedInstance.performPut(withJsonBody: studentJsonBody, objectId: student.objectId){
                     (results, error) in
                     guard error == nil else {
-                        print(error!)
+                        completion(error)
                         return
                     }
-                    if let results = results{
-                        print(results)
-                    }
+                    completion(nil)
                 }
             } else {
                 // no student locations with unique key
                 // post new student location
                 ParseClient.sharedInstance.post(studentData: studentJsonBody){
-                    (objectId, error) in
-                    print((objectId, error?.localizedDescription ?? ""))
+                    (_, error) in
+                    guard error == nil else {
+                        completion(error)
+                        return
+                    }
+                    completion(nil)
                 }
             }
         }
     }
     
-    func studentJsonBody() -> [String:Any]?{
+    /**
+        This method builds the student location json body to be posted to the Parse Api.
+        An alert will display any errors.
+     
+        - returns: Returns dictionary representing student location to be posted to Parse Api. Nil can be returned.
+    */
+    func buildStudentJsonBody() -> [String:Any]?{
         guard let mediaUrl = websiteTextField.text else {
             return nil
         }
         guard let lat = locationData?.coordinate.latitude,
             let lon = locationData?.coordinate.longitude,
             let locationDescription = locationData?.description else{
-                return nil
+            return nil
         }
         let currentUser = SharedData.sharedInstance.currentUser
         guard let uniqueKey = currentUser?.userKey,
@@ -94,7 +117,11 @@ class InputUrlViewController: UIViewController, StudentDataConverter {
         return jsonBody
     }
     
-    /// query used to query for students with uniqueKey
+    /**
+        Builds uniqueId query to be used in Parse Api call.
+     
+        - returns: URLQueryItem or nil
+    */
     func objectIdQuery() -> URLQueryItem?{
         guard let uniqueKey = SharedData.sharedInstance.currentUser?.userKey else {
             return nil

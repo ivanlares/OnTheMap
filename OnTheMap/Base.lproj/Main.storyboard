@@ -255,16 +255,22 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="lKL-gy-xjw">
                                 <rect key="frame" x="16" y="185" width="343" height="432"/>
                             </mapView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ZQ7-tY-Rqb">
+                                <rect key="frame" x="169" y="383" width="37" height="37"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.2470588235" green="0.66274509800000003" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Nnl-oX-TH6" firstAttribute="top" secondItem="ACa-cG-0mE" secondAttribute="bottom" constant="8" id="9p9-xK-mZA"/>
                             <constraint firstItem="AOr-pZ-ry0" firstAttribute="leading" secondItem="X49-BQ-Jt0" secondAttribute="leading" id="CYh-AX-Ad8"/>
                             <constraint firstItem="AOr-pZ-ry0" firstAttribute="top" secondItem="lKL-gy-xjw" secondAttribute="bottom" constant="8" id="EFf-Yu-wOy"/>
+                            <constraint firstItem="ZQ7-tY-Rqb" firstAttribute="centerY" secondItem="lKL-gy-xjw" secondAttribute="centerY" id="Gea-Bl-fZT"/>
                             <constraint firstAttribute="trailing" secondItem="AOr-pZ-ry0" secondAttribute="trailing" id="IdT-Ij-Kdq"/>
                             <constraint firstItem="lKL-gy-xjw" firstAttribute="trailing" secondItem="X49-BQ-Jt0" secondAttribute="trailingMargin" id="MYP-p6-gsE"/>
                             <constraint firstItem="lKL-gy-xjw" firstAttribute="top" secondItem="lLc-cQ-y9i" secondAttribute="bottom" constant="8" id="Swi-lS-whA"/>
                             <constraint firstItem="lKL-gy-xjw" firstAttribute="leading" secondItem="X49-BQ-Jt0" secondAttribute="leadingMargin" id="W7y-4M-hYp"/>
+                            <constraint firstItem="ZQ7-tY-Rqb" firstAttribute="centerX" secondItem="lKL-gy-xjw" secondAttribute="centerX" id="a6W-tP-hFM"/>
                             <constraint firstItem="lLc-cQ-y9i" firstAttribute="leading" secondItem="X49-BQ-Jt0" secondAttribute="leadingMargin" id="bh3-qv-pUX"/>
                             <constraint firstItem="lLc-cQ-y9i" firstAttribute="trailing" secondItem="X49-BQ-Jt0" secondAttribute="trailingMargin" id="c2y-P3-4qt"/>
                             <constraint firstItem="tIy-i5-Bra" firstAttribute="top" secondItem="AOr-pZ-ry0" secondAttribute="bottom" id="cax-8L-nce"/>
@@ -281,6 +287,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="ZQ7-tY-Rqb" id="BDN-be-tgk"/>
                         <outlet property="mapView" destination="lKL-gy-xjw" id="f65-wP-foT"/>
                         <outlet property="submitButton" destination="AOr-pZ-ry0" id="oCT-Wt-qHA"/>
                         <outlet property="websiteTextField" destination="lLc-cQ-y9i" id="EfD-9Y-GUT"/>
