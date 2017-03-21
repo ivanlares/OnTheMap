@@ -14,8 +14,8 @@ class MapViewController: UIViewController, StudentDataConverter{
     
     @IBOutlet weak var mapView: MKMapView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         updateMapView()
     }
 
