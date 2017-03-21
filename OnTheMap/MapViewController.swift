@@ -16,29 +16,9 @@ class MapViewController: UIViewController, StudentDataConverter{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        ParseClient.sharedInstance.getStudentLocations(){
-            (data, error) in
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return
-            }
-            
-            if let studentData = self.convert(studentData: data){
-                performOnMain(){
-                    SharedData.sharedInstance.studentLocations = studentData
-                    self.addAnnotationsToMap()
-                }
-            }
-        }
+        updateMapView()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        addAnnotationsToMap()
-    }
-    
+
     // MARK: - Target Action
     
     @IBAction func didPressLogout(_ sender: UIBarButtonItem) {
@@ -47,6 +27,7 @@ class MapViewController: UIViewController, StudentDataConverter{
     }
     
     @IBAction func didPressRefresh(_ sender: UIBarButtonItem) {
+        updateMapView()
     }
     
     @IBAction func didPressAddPin(_ sender: UIBarButtonItem) {
@@ -54,12 +35,12 @@ class MapViewController: UIViewController, StudentDataConverter{
         present(postDataNavigationController, animated: true, completion: nil)
     }
     
-    
     // MARK: Helper
     
-    /// removes current annotations and
-    /// re-inserts annotations
-    func addAnnotationsToMap(){
+    /** removes current annotations and
+        re-inserts annotations
+     */
+    func updateAnnotations(){
         guard !SharedData.sharedInstance.studentLocations.isEmpty else {
             return
         }
@@ -77,6 +58,43 @@ class MapViewController: UIViewController, StudentDataConverter{
         
         mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotations(annotations)
+    }
+    
+    /**
+     Downloads new student location data and updates studentLocation array .
+     
+     - Parameter completion: @escaping (Error?) -> Void
+     */
+    func downloadStudentData(completion: @escaping (Error?) -> Void){
+        ParseClient.sharedInstance.getStudentLocations(){
+            (data, error) in
+            guard error == nil else {
+                completion(error)
+                print(error!.localizedDescription)
+                return
+            }
+            
+            if let studentData = self.convert(studentData: data){
+                performOnMain(){
+                    SharedData.sharedInstance.studentLocations = studentData
+                    completion(nil)
+                }
+            } else {
+                // TODO: return custom error
+            }
+        }
+    }
+
+    /// downloads new data and updates annotations
+    func updateMapView(){
+        downloadStudentData(){
+            error in
+            guard error == nil else{
+                print(error!)
+                return
+            }
+            performOnMain { self.updateAnnotations() }
+        }
     }
 
 }
