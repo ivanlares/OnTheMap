@@ -184,6 +184,10 @@
                                     <action selector="didPressNext:" destination="qIb-fn-ztF" eventType="touchUpInside" id="Ef6-rU-cmi"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="sKb-2Y-TaW">
+                                <rect key="frame" x="169" y="185" width="37" height="37"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.2470588235" green="0.66274509800000003" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -193,7 +197,9 @@
                             <constraint firstAttribute="trailing" secondItem="ksC-bZ-7BL" secondAttribute="trailing" id="IOE-ID-Mej"/>
                             <constraint firstItem="YkP-D6-NlF" firstAttribute="leading" secondItem="RbB-wY-fYx" secondAttribute="leadingMargin" id="NAK-Dd-Yga"/>
                             <constraint firstItem="ksC-bZ-7BL" firstAttribute="leading" secondItem="RbB-wY-fYx" secondAttribute="leading" id="NzR-oU-dYX"/>
+                            <constraint firstItem="sKb-2Y-TaW" firstAttribute="top" secondItem="zwe-A9-FTl" secondAttribute="bottom" constant="8" id="Sbd-HK-YP9"/>
                             <constraint firstItem="zwe-A9-FTl" firstAttribute="trailing" secondItem="RbB-wY-fYx" secondAttribute="trailingMargin" id="ecb-2v-HJa"/>
+                            <constraint firstItem="sKb-2Y-TaW" firstAttribute="centerX" secondItem="RbB-wY-fYx" secondAttribute="centerX" id="p1Z-GP-jCY"/>
                             <constraint firstItem="zwe-A9-FTl" firstAttribute="leading" secondItem="RbB-wY-fYx" secondAttribute="leadingMargin" id="qlF-w1-LLB"/>
                             <constraint firstItem="zwe-A9-FTl" firstAttribute="top" secondItem="YkP-D6-NlF" secondAttribute="bottom" constant="8" id="yto-NK-VNj"/>
                         </constraints>
@@ -206,6 +212,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="sKb-2Y-TaW" id="qdW-cb-ZGK"/>
                         <outlet property="locationTextField" destination="zwe-A9-FTl" id="CrX-Fu-Vta"/>
                         <outlet property="nextButton" destination="ksC-bZ-7BL" id="gJ2-Sm-cxT"/>
                         <segue destination="vDM-zi-JvI" kind="show" identifier="SubmitSegue" id="dpd-17-EoG"/>

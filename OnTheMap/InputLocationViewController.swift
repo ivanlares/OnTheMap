@@ -16,6 +16,7 @@ class InputLocationViewController: UIViewController {
 
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +31,10 @@ class InputLocationViewController: UIViewController {
         guard let locationString = locationTextField.text else {
             return
         }
-        
+        activityIndicator.startAnimating()
         find(location: locationString){ (coordinate, error) in
+            performOnMain { self.activityIndicator.stopAnimating() }
+            
             // Handle error
             guard error == nil else {
                 print(error!.localizedDescription)
