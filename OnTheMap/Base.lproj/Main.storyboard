@@ -118,13 +118,19 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="4r6-7v-jbc">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="C28-FQ-Xod">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4r6-7v-jbc" firstAttribute="top" secondItem="0Oq-ef-4xB" secondAttribute="top" id="PrX-py-g4y"/>
                             <constraint firstAttribute="bottom" secondItem="4r6-7v-jbc" secondAttribute="bottom" id="dux-rc-CT9"/>
+                            <constraint firstItem="C28-FQ-Xod" firstAttribute="centerX" secondItem="4r6-7v-jbc" secondAttribute="centerX" id="fR6-2A-mYp"/>
                             <constraint firstItem="4r6-7v-jbc" firstAttribute="leading" secondItem="0Oq-ef-4xB" secondAttribute="leading" id="tGj-Kf-EfF"/>
                             <constraint firstAttribute="trailing" secondItem="4r6-7v-jbc" secondAttribute="trailing" id="uvD-ad-9yt"/>
+                            <constraint firstItem="C28-FQ-Xod" firstAttribute="centerY" secondItem="4r6-7v-jbc" secondAttribute="centerY" id="xtz-v4-o7E"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7gd-4f-RcE">
@@ -147,6 +153,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="C28-FQ-Xod" id="MiK-oM-lgg"/>
                         <outlet property="mapView" destination="4r6-7v-jbc" id="lPY-J9-dzD"/>
                     </connections>
                 </viewController>

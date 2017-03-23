@@ -13,6 +13,7 @@ import MapKit
 class MapViewController: UIViewController, StudentDataConverter{
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
