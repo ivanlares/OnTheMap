@@ -11,6 +11,7 @@ import UIKit
 
 class LoginViewController: UIViewController{
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
@@ -25,22 +26,31 @@ class LoginViewController: UIViewController{
     // MARK: Target Action
     
     @IBAction func didPressLogin(_ sender: UIButton) {
-        // check for nil 
+        activityIndicator.startAnimating()
+        
+        //TODO: Show custom error message for each guard
         guard let email = emailTextField.text else {
+            activityIndicator.stopAnimating()
             return
         }
         guard let password = passwordTextField.text else {
+            activityIndicator.stopAnimating()
             return
         }
-        // check for white space
         guard !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            activityIndicator.stopAnimating()
             return
         }
         guard !password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            activityIndicator.stopAnimating()
             return
         }
 
-        login()
+        login(){
+            performOnMain{
+                self.activityIndicator.stopAnimating()
+            }
+        }
     }
     
     // MARK: Helper
@@ -50,9 +60,10 @@ class LoginViewController: UIViewController{
         passwordTextField.delegate = self
     }
     
-    func login(){
+    func login(completion:@escaping ()->()){
         UdacityClient.sharedInstance.loginWith(username: emailTextField.text!, password: passwordTextField.text!){
             (userData: (userKey:String,firstName:String,lastName:String)?, error) in
+            completion()
             guard error == nil else {
                 print(error!)
                 return
