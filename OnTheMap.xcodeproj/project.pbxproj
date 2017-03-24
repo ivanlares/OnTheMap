@@ -131,13 +131,13 @@
 		EAE8163D1E20977B00AC4406 /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
-				EA9540651E850B14004263D6 /* Extension */,
 				EAE8163E1E20977B00AC4406 /* AppDelegate.swift */,
 				EAE816541E20986D00AC4406 /* Client */,
 				EAE816531E2097D600AC4406 /* Model */,
 				EAE816501E20979600AC4406 /* View */,
 				EAE816521E2097C900AC4406 /* Controller */,
 				EA8047691E2AE1690051FEFB /* Utility */,
+				EA9540651E850B14004263D6 /* Extension */,
 				EAE816511E2097AE00AC4406 /* Support */,
 			);
 			path = OnTheMap;

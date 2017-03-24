@@ -52,6 +52,7 @@ class LoginViewController: UIViewController{
         passwordTextField.delegate = self
     }
     
+    //TODO: return error through completion handler
     func login(completion:@escaping ()->()){
         UdacityClient.sharedInstance.loginWith(username: emailTextField.text!, password: passwordTextField.text!){
             (userData: (userKey:String,firstName:String,lastName:String)?, error) in
