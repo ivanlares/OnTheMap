@@ -28,24 +28,21 @@ class LoginViewController: UIViewController{
     @IBAction func didPressLogin(_ sender: UIButton) {
         activityIndicator.startAnimating()
         
-        //TODO: Show custom error message for each guard
-        guard let email = emailTextField.text else {
+        guard let email = emailTextField.text,
+            !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             activityIndicator.stopAnimating()
+            let alert = UIAlertController.alert(withTitle: "Whoops", message: "Please enter a valid email address.")
+            present(alert, animated: true)
             return
         }
-        guard let password = passwordTextField.text else {
+        guard let password = passwordTextField.text,
+            !password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             activityIndicator.stopAnimating()
+            let alert = UIAlertController.alert(withTitle: "Whoops", message: "Please enter a valid password.")
+            present(alert, animated: true)
             return
         }
-        guard !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            activityIndicator.stopAnimating()
-            return
-        }
-        guard !password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            activityIndicator.stopAnimating()
-            return
-        }
-
+        
         login(){
             performOnMain{
                 self.activityIndicator.stopAnimating()
