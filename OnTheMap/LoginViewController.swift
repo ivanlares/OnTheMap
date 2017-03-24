@@ -14,7 +14,6 @@ class LoginViewController: UIViewController{
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask{
         return .portrait
     }
@@ -30,24 +29,20 @@ class LoginViewController: UIViewController{
         
         guard let email = emailTextField.text,
             !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            activityIndicator.stopAnimating()
+            stopActivityIndicator()
             let alert = UIAlertController.alert(withTitle: "Whoops", message: "Please enter a valid email address.")
             present(alert, animated: true)
             return
         }
         guard let password = passwordTextField.text,
             !password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            activityIndicator.stopAnimating()
+            stopActivityIndicator()
             let alert = UIAlertController.alert(withTitle: "Whoops", message: "Please enter a valid password.")
             present(alert, animated: true)
             return
         }
         
-        login(){
-            performOnMain{
-                self.activityIndicator.stopAnimating()
-            }
-        }
+        login(completion: {self.stopActivityIndicator()})
     }
     
     // MARK: Helper
@@ -83,6 +78,13 @@ class LoginViewController: UIViewController{
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let studentInfoTabBarController = storyboard.instantiateViewController(withIdentifier: "StudentInfoTabBar")
         present(studentInfoTabBarController, animated: true, completion: nil)
+    }
+    
+    /// stops activity indicator on the main thread
+    func stopActivityIndicator(){
+        performOnMain{
+            self.activityIndicator.stopAnimating()
+        }
     }
 
 }
