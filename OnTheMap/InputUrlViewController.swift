@@ -20,6 +20,7 @@ class InputUrlViewController: UIViewController, StudentDataConverter {
     override func viewDidLoad() {
         super.viewDidLoad()
         websiteTextField.delegate = self
+        addPin(withLocation: locationData)
     }
 
     @IBAction func didPressSubmit(_ sender: UIButton) {
@@ -135,11 +136,35 @@ class InputUrlViewController: UIViewController, StudentDataConverter {
             URLQueryItem(name: ParseClient.QueryParameters.whereKey, value: queryValue)
         return objectIdQuery
     }
+    
+    func addPin(withLocation location: LocationData?){
+        guard let location = location else { return }
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location.coordinate
+        annotation.title = location.description
+        mapView.addAnnotation(annotation)
+    }
 }
 
 extension InputUrlViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return false
+    }
+}
+
+extension InputUrlViewController: MKMapViewDelegate{
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView?.canShowCallout = true
+            pinView?.pinTintColor = .red
+            pinView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        else { pinView!.annotation = annotation }
+        
+        return pinView
     }
 }
