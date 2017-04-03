@@ -41,8 +41,13 @@ class MapViewController: UIViewController, StudentDataConverter{
         present(postDataNavigationController, animated: true, completion: nil)
     }
     
-    func didPressWebButton(){
-        print(#function)
+    func didPressWebButton(withUrlString urlString: String?){
+        guard let urlString = urlString, let url = URL(string: urlString)  else {
+            return
+        }
+        if UIApplication.shared.canOpenURL(url){
+            UIApplication.shared.open(url)
+        }
     }
     
     // MARK: Helper
@@ -132,8 +137,8 @@ extension MapViewController: MKMapViewDelegate{
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if control == view.rightCalloutAccessoryView  {
-            didPressWebButton()
+        if control == view.rightCalloutAccessoryView{
+            didPressWebButton(withUrlString: view.annotation?.subtitle ?? nil)
         }
     }
 }
