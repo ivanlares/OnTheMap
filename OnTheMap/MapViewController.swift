@@ -15,6 +15,11 @@ class MapViewController: UIViewController, StudentDataConverter{
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        mapView.delegate = self
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         updateMapView()
@@ -34,6 +39,10 @@ class MapViewController: UIViewController, StudentDataConverter{
     @IBAction func didPressAddPin(_ sender: UIBarButtonItem) {
         let postDataNavigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PostDataNavigationController")
         present(postDataNavigationController, animated: true, completion: nil)
+    }
+    
+    func didPressWebButton(){
+        print(#function)
     }
     
     // MARK: Helper
@@ -109,10 +118,22 @@ extension MapViewController: MKMapViewDelegate{
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView?.canShowCallout = true
             pinView?.pinTintColor = .red
-            pinView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            
+            let webButton = UIButton(type: .custom)
+            let webImage = UIImage(named: "web")
+            webButton.setImage(webImage, for: .normal)
+            webButton.frame =
+                CGRect(x: 0, y: 0, width: webImage!.size.width, height: webImage!.size.height)
+            pinView?.rightCalloutAccessoryView = webButton
         }
         else { pinView!.annotation = annotation }
         
         return pinView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView  {
+            didPressWebButton()
+        }
     }
 }
