@@ -17,6 +17,19 @@ class LoginViewController: UIViewController{
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask{
         return .portrait
     }
+    enum LoginError: LocalizedError{
+        case invalidEmail
+        case invalidPassword
+        case clientError
+        
+        var errorDescription: String?{
+            switch self {
+            case .invalidEmail: return "Invalid email."
+            case .invalidPassword: return "Invalid Password"
+            case .clientError: return "Unexpected server error"
+            }
+        }
+    }
     
     override func viewDidLoad() {
         setDelegates()
@@ -29,20 +42,28 @@ class LoginViewController: UIViewController{
         
         guard let email = emailTextField.text,
             !email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            stopActivityIndicator()
-            let alert = UIAlertController.alert(withTitle: "Whoops", message: "Please enter a valid email address.")
-            present(alert, animated: true)
-            return
+                stopActivityIndicator()
+                let alert = UIAlertController.alert(withTitle: "Whoops", message: LoginError.invalidEmail.localizedDescription)
+                present(alert, animated: true)
+                return
         }
         guard let password = passwordTextField.text,
             !password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            stopActivityIndicator()
-            let alert = UIAlertController.alert(withTitle: "Whoops", message: "Please enter a valid password.")
-            present(alert, animated: true)
-            return
+                stopActivityIndicator()
+                let alert = UIAlertController.alert(withTitle: "Whoops", message: LoginError.invalidPassword.localizedDescription)
+                present(alert, animated: true)
+                return
         }
         
-        login(completion: {self.stopActivityIndicator()})
+        login() { error in
+            self.stopActivityIndicator()
+            
+            guard let error = error else{ return }
+            performOnMain {
+                let alert = UIAlertController.alert(withTitle: "Error", message: error.localizedDescription)
+                self.present(alert, animated: true)
+            }
+        }
     }
     
     // MARK: Helper
@@ -52,22 +73,22 @@ class LoginViewController: UIViewController{
         passwordTextField.delegate = self
     }
     
-    //TODO: return error through completion handler
-    func login(completion:@escaping ()->()){
+    func login(completion:@escaping (Error?)->()){
         UdacityClient.sharedInstance.loginWith(username: emailTextField.text!, password: passwordTextField.text!){
             (userData: (userKey:String,firstName:String,lastName:String)?, error) in
-            completion()
+            
             guard error == nil else {
-                print(error!.localizedDescription)
+                completion(error)
                 return
             }
             guard let userData = userData else {
-                //print(LoginError.unableToRetrieveUserData)
+                completion(LoginError.clientError)
                 return
             }
             performOnMain{
                 SharedData.sharedInstance.currentUser = UdacityUser(userKey: userData.userKey, firstName: userData.firstName, lastName: userData.lastName)
                 self.presentTabController()
+                completion(nil)
             }
         }
     }
