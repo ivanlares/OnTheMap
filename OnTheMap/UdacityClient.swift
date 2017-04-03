@@ -15,6 +15,21 @@ class UdacityClient{
     var userKey: String?
     typealias LoginCompletion =
         ((userKey: String,firstName: String, lastName: String)?, _ error: Error?) -> ()
+    enum NetworkingError: LocalizedError{
+        case parsingError
+        case unexpectedData
+        case unableToRetrieveData
+        case serverError(String)
+        
+        var errorDescription: String?{
+            get{
+                switch self{
+                case .serverError(let message): return message
+                default: return "Unable to retrieve data."
+                }
+            }
+        }
+    }
     
     // MARK: Request Methods 
     
@@ -104,8 +119,6 @@ class UdacityClient{
         
     }
 
-    
-    
     // MARK: Convenience Methods
     
     /**
@@ -134,8 +147,8 @@ class UdacityClient{
             }
             // check if the server returned an error
             if let errorString = results?[JsonKeys.error] as? String, let
-                errorCode = results?[JsonKeys.status] as? Int{
-                completionHandler(nil, NSError(domain: "com.laresivan.onthemap", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorString]))
+                _ = results?[JsonKeys.status] as? Int{
+                completionHandler(nil, NetworkingError.serverError(errorString))
                 return
             }
             // extract data from results
@@ -144,7 +157,7 @@ class UdacityClient{
                 let sessionResults = results?[JsonKeys.session] as? NSDictionary,
                 let sessionId = sessionResults[JsonKeys.sessionID] as? String
                 else {
-                completionHandler(nil, LoginError.unableToRetrieveUserData)
+                completionHandler(nil, NetworkingError.unableToRetrieveData)
                 return
             }
             self.userKey = userKey
@@ -171,8 +184,8 @@ class UdacityClient{
             }
             // check if the server returned an error
             if let errorString = results[JsonKeys.error] as? String, let
-                errorCode = results[JsonKeys.status] as? Int{
-                completion(nil, NSError(domain: "com.laresivan.onthemap", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorString]))
+                _ = results[JsonKeys.status] as? Int{
+                completion(nil, NetworkingError.serverError(errorString))
                 return
             }
             // extract user name
@@ -180,7 +193,7 @@ class UdacityClient{
                 let studentData = results[JsonKeys.user] as? [String: Any],
                 let firstName = studentData[JsonKeys.firstName] as? String,
                 let lastName = studentData[JsonKeys.lastName] as? String else {
-                    completion(nil, LoginError.unableToRetrieveUserData)
+                    completion(nil, NetworkingError.unableToRetrieveData)
                     return
             }
             completion((id, firstName, lastName), nil)

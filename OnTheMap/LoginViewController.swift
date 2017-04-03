@@ -58,11 +58,11 @@ class LoginViewController: UIViewController{
             (userData: (userKey:String,firstName:String,lastName:String)?, error) in
             completion()
             guard error == nil else {
-                print(error!)
+                print(error!.localizedDescription)
                 return
             }
             guard let userData = userData else {
-                print(LoginError.unableToRetrieveUserData)
+                //print(LoginError.unableToRetrieveUserData)
                 return
             }
             performOnMain{

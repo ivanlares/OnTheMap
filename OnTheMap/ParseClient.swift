@@ -172,7 +172,7 @@ class ParseClient{
                 return
             }
             guard let results = results else {
-                completion(nil, ParseApiError.unableToFetchData)
+                completion(nil, NetworkingError.unableToRetrieveData)
                 return
             }
             completion(results, nil)
