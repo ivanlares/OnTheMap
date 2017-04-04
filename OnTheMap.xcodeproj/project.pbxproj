@@ -16,7 +16,6 @@
 		EA8047601E29E0740051FEFB /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA80475F1E29E0740051FEFB /* SharedData.swift */; };
 		EA8047621E29E0A10051FEFB /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8047611E29E0A10051FEFB /* StudentLocation.swift */; };
 		EA8047641E29E9B50051FEFB /* StudentConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8047631E29E9B50051FEFB /* StudentConstants.swift */; };
-		EA8047661E2ADA3E0051FEFB /* StudentLocationDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8047651E2ADA3E0051FEFB /* StudentLocationDownloader.swift */; };
 		EA8047681E2AE15B0051FEFB /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8047671E2AE15B0051FEFB /* GCDBlackBox.swift */; };
 		EA80476B1E2BBC5E0051FEFB /* InputLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA80476A1E2BBC5E0051FEFB /* InputLocationViewController.swift */; };
 		EA80476D1E2BBC7E0051FEFB /* InputUrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA80476C1E2BBC7E0051FEFB /* InputUrlViewController.swift */; };
@@ -41,7 +40,6 @@
 		EA80475F1E29E0740051FEFB /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		EA8047611E29E0A10051FEFB /* StudentLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
 		EA8047631E29E9B50051FEFB /* StudentConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentConstants.swift; sourceTree = "<group>"; };
-		EA8047651E2ADA3E0051FEFB /* StudentLocationDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocationDownloader.swift; sourceTree = "<group>"; };
 		EA8047671E2AE15B0051FEFB /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		EA80476A1E2BBC5E0051FEFB /* InputLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputLocationViewController.swift; sourceTree = "<group>"; };
 		EA80476C1E2BBC7E0051FEFB /* InputUrlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputUrlViewController.swift; sourceTree = "<group>"; };
@@ -174,7 +172,6 @@
 			children = (
 				EAE8165A1E20AF6100AC4406 /* LoginViewController.swift */,
 				EA4C01661E2730A400CB907D /* MapViewController.swift */,
-				EA8047651E2ADA3E0051FEFB /* StudentLocationDownloader.swift */,
 				EA80476A1E2BBC5E0051FEFB /* InputLocationViewController.swift */,
 				EA80476C1E2BBC7E0051FEFB /* InputUrlViewController.swift */,
 			);
@@ -294,7 +291,6 @@
 				EA092F381E7A4F12002D92FA /* JsonHelper.swift in Sources */,
 				EA4C01671E2730A400CB907D /* MapViewController.swift in Sources */,
 				EAE8163F1E20977B00AC4406 /* AppDelegate.swift in Sources */,
-				EA8047661E2ADA3E0051FEFB /* StudentLocationDownloader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

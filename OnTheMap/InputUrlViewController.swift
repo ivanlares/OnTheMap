@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class InputUrlViewController: UIViewController, StudentDataConverter {
+class InputUrlViewController: UIViewController{
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var websiteTextField: UITextField!
@@ -61,7 +61,7 @@ class InputUrlViewController: UIViewController, StudentDataConverter {
                 completion(error)
                 return
             }
-            if let students = self.convert(studentData: results), let student = students.first{
+            if let students = StudentLocation.convert(studentData: results), let student = students.first{
                 // there are students with unique key
                 // use put method to update student data
                 ParseClient.sharedInstance.performPut(withJsonBody: studentJsonBody, objectId: student.objectId){

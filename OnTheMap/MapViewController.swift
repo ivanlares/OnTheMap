@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, StudentDataConverter{
+class MapViewController: UIViewController{
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -89,7 +89,7 @@ class MapViewController: UIViewController, StudentDataConverter{
                 return
             }
             
-            if let studentData = self.convert(studentData: data){
+            if let studentData = StudentLocation.convert(studentData: data){
                 performOnMain(){
                     SharedData.sharedInstance.studentLocations = studentData
                     completion(nil)

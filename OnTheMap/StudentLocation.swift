@@ -43,4 +43,27 @@ struct StudentLocation{
         self.mapString = mapString
         self.uniqueKey = uniqueKey
     }
+    
+    /**
+     Converts student json data into '[StrudentLocation]?'.
+     
+     - Parameter studentData: student json data of type `Any?`.
+     */
+    static func convert(studentData: Any?) -> [StudentLocation]?{
+        guard let studentData = studentData as? [String: Any] else {
+            return nil
+        }
+        guard let studentDataArray = studentData[StudentConstants.Keys.retults] as? [[String: Any]] else {
+            return nil
+        }
+        
+        var students = [StudentLocation]()
+        for studentDic in studentDataArray{
+            if let student = StudentLocation(dictionary: studentDic){
+                students.append(student)
+            }
+        }
+        
+        return students
+    }
 }
