@@ -143,7 +143,9 @@ class InputUrlViewController: UIViewController{
         annotation.coordinate = location.coordinate
         annotation.title = location.description
         mapView.addAnnotation(annotation)
+        mapView.zoomIn(coordinate: annotation.coordinate)
     }
+    
 }
 
 extension InputUrlViewController: UITextFieldDelegate{

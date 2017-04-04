@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EA00F3B21E9222B600E0402F /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA00F3B11E9222B600E0402F /* NetworkingError.swift */; };
+		EA00F3B51E93687700E0402F /* MKMapView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA00F3B41E93687700E0402F /* MKMapView+Extension.swift */; };
 		EA04BC2A1E235272001DDCC2 /* UdacityClientConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA04BC291E235272001DDCC2 /* UdacityClientConstants.swift */; };
 		EA092F381E7A4F12002D92FA /* JsonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA092F371E7A4F12002D92FA /* JsonHelper.swift */; };
 		EA4C01671E2730A400CB907D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4C01661E2730A400CB907D /* MapViewController.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		EA00F3B11E9222B600E0402F /* NetworkingError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
+		EA00F3B41E93687700E0402F /* MKMapView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MKMapView+Extension.swift"; sourceTree = "<group>"; };
 		EA04BC291E235272001DDCC2 /* UdacityClientConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClientConstants.swift; sourceTree = "<group>"; };
 		EA092F371E7A4F12002D92FA /* JsonHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonHelper.swift; sourceTree = "<group>"; };
 		EA4C01661E2730A400CB907D /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				EA9540661E850B2A004263D6 /* UIAlertController+Extension.swift */,
+				EA00F3B41E93687700E0402F /* MKMapView+Extension.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				EA8047641E29E9B50051FEFB /* StudentConstants.swift in Sources */,
 				EA4C016D1E274F3A00CB907D /* ParseClientConstants.swift in Sources */,
 				EA4C016B1E274CA900CB907D /* ParseClient.swift in Sources */,
+				EA00F3B51E93687700E0402F /* MKMapView+Extension.swift in Sources */,
 				EA00F3B21E9222B600E0402F /* NetworkingError.swift in Sources */,
 				EA937C621E2EA52800352703 /* UdacityUser.swift in Sources */,
 				EA8047681E2AE15B0051FEFB /* GCDBlackBox.swift in Sources */,
