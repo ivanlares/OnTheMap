@@ -17,7 +17,18 @@ class InputLocationViewController: UIViewController {
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
+    enum InputLocationError: LocalizedError{
+        case unknownLocation
+        case emptyLocation
+        
+        var errorDescription: String?{
+            switch self{
+            case .unknownLocation: return "Unable to find location."
+            case .emptyLocation: return "Empty location text."
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         locationTextField.delegate = self
@@ -28,20 +39,25 @@ class InputLocationViewController: UIViewController {
     // MARK: Target Action 
     
     @IBAction func didPressNext(_ sender: UIButton) {
-        guard let locationString = locationTextField.text else {
+        guard let locationString = locationTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            !locationString.isEmpty else {
+            let errorAlert = UIAlertController.alert(withTitle: "Error", message: InputLocationError.emptyLocation.localizedDescription)
+            present(errorAlert, animated: true)
             return
         }
+        
         activityIndicator.startAnimating()
+        
         find(location: locationString){ (coordinate, error) in
             performOnMain { self.activityIndicator.stopAnimating() }
             
             // Handle error
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return
-            }
-            guard let coordinate = coordinate else {
-                print("Unexpected error, unable to find location")
+            guard let coordinate = coordinate, error == nil else {
+                let errorAlert =
+                    UIAlertController.alert(withTitle: "Geocoding Error", message: error?.localizedDescription ?? InputLocationError.unknownLocation.localizedDescription)
+                performOnMain {
+                    self.present(errorAlert, animated: true)
+                }
                 return
             }
             
@@ -67,21 +83,12 @@ class InputLocationViewController: UIViewController {
                 completionHandler(nil, error)
                 return
             }
-            let noMatchesError =
-                NSError(domain: "com.laresivan.onthemap", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to find any matches"])
-            guard let placemarks = placemarks, !placemarks.isEmpty else {
-                completionHandler(nil, noMatchesError)
+            guard let placemarks = placemarks,
+                let placemark = placemarks.first,
+                let location = placemark.location else {
+                completionHandler(nil, InputLocationError.unknownLocation)
                 return
             }
-            guard let placemark = placemarks.first else{
-                completionHandler(nil, noMatchesError)
-                return 
-            }
-            guard let location = placemark.location else{
-                completionHandler(nil, noMatchesError)
-                return
-            }
-            
             // retrive coordinates of location
             completionHandler(location.coordinate, nil)
         }
@@ -113,11 +120,9 @@ extension InputLocationViewController: UITextFieldDelegate{
         let newString = currentText.replacingCharacters(in: range, with: string)
         
         if newString.isEmpty{
-            print("newString is empty")
             nextButton.isEnabled = false
             nextButton.alpha = 0.5
         } else {
-            print("newString is not empty")
             nextButton.isEnabled = true
             nextButton.alpha = 1
         }
