@@ -16,6 +16,19 @@ class InputUrlViewController: UIViewController{
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var submitButton: UIButton!
     var locationData: LocationData?
+    enum InputUrlError: LocalizedError{
+        case invalidStudentLocation
+        case invalidQuery
+        
+        var errorDescription: String?{
+            switch self{
+            case .invalidStudentLocation:
+                return "Student location created is invalid."
+            case .invalidQuery:
+                return "Query built is invalid."
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,12 +42,14 @@ class InputUrlViewController: UIViewController{
         submit(){ error in
             performOnMain {
                 self.activityIndicator.stopAnimating()
-                if let error = error{
-                    // Show alert
-                    print((error, #line))
-                } else {
+
+                guard let error = error else {
                     self.dismiss(animated: true)
+                    return
                 }
+                
+                let errorAlert = UIAlertController.alert(withTitle: "Error", message: error.localizedDescription)
+                self.present(errorAlert, animated: true)
             }
         }
     }
@@ -47,11 +62,11 @@ class InputUrlViewController: UIViewController{
     
     func submit(completion:@escaping (Error?)->Void){
         guard let studentJsonBody = buildStudentJsonBody() else {
-            completion(nil)
+            completion(InputUrlError.invalidStudentLocation)
             return
         }
         guard let objectIdQuery = self.objectIdQuery() else {
-            completion(nil)
+            completion(InputUrlError.invalidQuery)
             return
         }
         
@@ -94,9 +109,11 @@ class InputUrlViewController: UIViewController{
         - returns: Returns dictionary representing student location to be posted to Parse Api. Nil can be returned.
     */
     func buildStudentJsonBody() -> [String:Any]?{
-        guard let mediaUrl = websiteTextField.text else {
+        guard let mediaUrl = websiteTextField.text,
+            !mediaUrl.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             return nil
         }
+        
         guard let lat = locationData?.coordinate.latitude,
             let lon = locationData?.coordinate.longitude,
             let locationDescription = locationData?.description else{
