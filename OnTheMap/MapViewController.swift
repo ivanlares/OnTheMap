@@ -126,7 +126,9 @@ extension MapViewController: MKMapViewDelegate{
             
             let webButton = UIButton(type: .custom)
             let webImage = UIImage(named: "web")
+            let webHighlightedImage = UIImage(named: "webHighlighted")
             webButton.setImage(webImage, for: .normal)
+            webButton.setImage(webHighlightedImage, for: .highlighted)
             webButton.frame =
                 CGRect(x: 0, y: 0, width: webImage!.size.width, height: webImage!.size.height)
             pinView?.rightCalloutAccessoryView = webButton
