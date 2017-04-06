@@ -50,7 +50,8 @@ struct StudentLocation{
      - Parameter studentData: student json data of type `Any?`.
      */
     static func convert(studentData: Any?) -> [StudentLocation]?{
-        guard let studentData = studentData as? [String: Any] else {
+        guard let studentData = studentData as? [String: Any],
+            !studentData.isEmpty else {
             return nil
         }
         guard let studentDataArray = studentData[StudentConstants.Keys.retults] as? [[String: Any]] else {
