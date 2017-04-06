@@ -20,7 +20,7 @@ class ParseClient{
         // setup url request
         guard let queryString = JsonHelper.query(withItems: queryItems),
             let url = URL(string: Url.base + queryString) else {
-                print("\nUnable to create url: \(#line)")
+                completionHandler(nil, NetworkingError.serverError("Invalid Query"))
                 return
         }
         let request = NSMutableURLRequest(url: url)
@@ -39,7 +39,7 @@ class ParseClient{
             if let data = data {
                 JsonHelper.parse(jsonData: data, completionHandler: completionHandler)
             } else {
-                completionHandler(nil, NSError(domain: "com.laresivan.onthemap", code: 0, userInfo: nil))
+                completionHandler(nil, NetworkingError.unexpectedData)
                 return
             }
         }
@@ -55,8 +55,6 @@ class ParseClient{
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        // TODO: Test method with api keys
-        // use API key in Constants struct
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         
@@ -80,7 +78,7 @@ class ParseClient{
             if let data = data {
                 JsonHelper.parse(jsonData: data, completionHandler: completionHandler)
             } else {
-                completionHandler(nil, NSError(domain: "com.laresivan.onthemap", code: 0, userInfo: nil))
+                completionHandler(nil, NetworkingError.unableToRetrieveData)
                 return
             }
         }
@@ -118,7 +116,7 @@ class ParseClient{
             if let data = data {
                 JsonHelper.parse(jsonData: data, completionHandler: completionHandler)
             } else {
-                completionHandler(nil, NSError(domain: "com.laresivan.onthemap", code: 0, userInfo: nil))
+                completionHandler(nil, NetworkingError.unexpectedData)
                 return
             }
         }
@@ -147,17 +145,15 @@ class ParseClient{
             }
             // check if the server returned an error
             if let errorString = result?["error"] as? String, let errorCode = result?["code"] as? Int{
-                completion(nil, NSError(domain: "com.laresivan.onthemap", code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorString]))
+                completion(nil,NetworkingError.serverError(
+                    "\(errorString): \(errorCode)"))
                 return
             }
-            // used when there is an error accessing the results
-            let unexpectedError = NSError(domain: "Unexpected", code: 0, userInfo: nil)
-            
             // get object id
             if let objectId = result?["objectId"] as? String{
                 completion(objectId, nil)
             } else {
-                completion(nil, unexpectedError)
+                completion(nil, NetworkingError.unexpectedData)
             }
         }
     }
