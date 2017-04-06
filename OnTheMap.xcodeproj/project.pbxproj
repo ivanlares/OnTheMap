@@ -23,6 +23,7 @@
 		EA937C621E2EA52800352703 /* UdacityUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA937C611E2EA52800352703 /* UdacityUser.swift */; };
 		EA9540671E850B2A004263D6 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9540661E850B2A004263D6 /* UIAlertController+Extension.swift */; };
 		EAB786F51E95CC88006E103A /* StudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB786F41E95CC88006E103A /* StudentsTableViewController.swift */; };
+		EAB786F71E95D64C006E103A /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB786F61E95D64C006E103A /* UIApplication+Extension.swift */; };
 		EAE8163F1E20977B00AC4406 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE8163E1E20977B00AC4406 /* AppDelegate.swift */; };
 		EAE816441E20977B00AC4406 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAE816421E20977B00AC4406 /* Main.storyboard */; };
 		EAE816461E20977B00AC4406 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAE816451E20977B00AC4406 /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 		EA937C611E2EA52800352703 /* UdacityUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityUser.swift; sourceTree = "<group>"; };
 		EA9540661E850B2A004263D6 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		EAB786F41E95CC88006E103A /* StudentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsTableViewController.swift; sourceTree = "<group>"; };
+		EAB786F61E95D64C006E103A /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		EAE8163B1E20977B00AC4406 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE8163E1E20977B00AC4406 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAE816431E20977B00AC4406 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				EA9540661E850B2A004263D6 /* UIAlertController+Extension.swift */,
 				EA00F3B41E93687700E0402F /* MKMapView+Extension.swift */,
+				EAB786F61E95D64C006E103A /* UIApplication+Extension.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				EA04BC2A1E235272001DDCC2 /* UdacityClientConstants.swift in Sources */,
 				EA092F381E7A4F12002D92FA /* JsonHelper.swift in Sources */,
 				EA4C01671E2730A400CB907D /* MapViewController.swift in Sources */,
+				EAB786F71E95D64C006E103A /* UIApplication+Extension.swift in Sources */,
 				EAE8163F1E20977B00AC4406 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
