@@ -348,7 +348,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="SsA-fg-6zb" kind="show" id="DqG-B1-brf"/>
+                        <segue destination="SsA-fg-6zb" kind="relationship" relationship="rootViewController" id="wyL-8Y-e8H"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nmt-dE-sGg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -368,7 +368,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rF9-7g-n01" id="7jI-ep-iI9">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -378,6 +378,7 @@
                             <outlet property="delegate" destination="SsA-fg-6zb" id="1bb-vW-Z0d"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="0NL-IY-j9W"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6i0-Bt-qHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
