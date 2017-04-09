@@ -311,6 +311,7 @@
                     <connections>
                         <segue destination="rpz-mK-HSN" kind="relationship" relationship="viewControllers" id="n8u-xK-8be"/>
                         <segue destination="FQQ-Qf-YnP" kind="relationship" relationship="viewControllers" id="Uhf-BR-0ox"/>
+                        <segue destination="fRm-7s-Btl" kind="relationship" relationship="viewControllers" id="pzW-LW-B2w"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AWU-oQ-okN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -354,6 +355,84 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nmt-dE-sGg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1997.5999999999999" y="455.62218890554726"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5Al-ia-ey9">
+            <objects>
+                <navigationController id="fRm-7s-Btl" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="more" id="iVZ-Zc-zCB"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DVS-tB-fNS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="rHp-eP-eCq" kind="relationship" relationship="rootViewController" id="uT7-tJ-zNT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vwF-0B-ia7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1998" y="1179"/>
+        </scene>
+        <!--Settings Table View Controller-->
+        <scene sceneID="g18-q6-J75">
+            <objects>
+                <tableViewController id="rHp-eP-eCq" customClass="SettingsTableViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="n2e-Xr-Qxh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection headerTitle="" id="OVp-Te-nOw">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="0dA-xd-hbc">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0dA-xd-hbc" id="BY9-5Q-ZLc">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pMe-zT-cBp">
+                                                    <rect key="frame" x="8" y="8" width="359" height="53.5"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CaP-dA-dbu">
+                                                            <rect key="frame" x="130" y="0.0" width="99" height="33.5"/>
+                                                            <state key="normal" title="Delete All Pins">
+                                                                <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="didPressDeleteAll:" destination="rHp-eP-eCq" eventType="touchUpInside" id="xBA-fZ-gac"/>
+                                                            </connections>
+                                                        </button>
+                                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="TEk-jz-x7U">
+                                                            <rect key="frame" x="169.5" y="33.5" width="20" height="20"/>
+                                                        </activityIndicatorView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="pMe-zT-cBp" firstAttribute="leading" secondItem="BY9-5Q-ZLc" secondAttribute="leadingMargin" id="0us-LS-Ipp"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="pMe-zT-cBp" secondAttribute="bottom" id="Vi4-MB-24P"/>
+                                                <constraint firstItem="pMe-zT-cBp" firstAttribute="top" secondItem="BY9-5Q-ZLc" secondAttribute="topMargin" id="XpK-30-4x7"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="pMe-zT-cBp" secondAttribute="trailing" id="v6j-Bu-FYB"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="rHp-eP-eCq" id="Hb2-ti-4vA"/>
+                            <outlet property="delegate" destination="rHp-eP-eCq" id="8vO-NF-koB"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="fZj-b7-KMD"/>
+                    <connections>
+                        <outlet property="deletionIndicator" destination="TEk-jz-x7U" id="24I-QD-SGt"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="upO-D4-MV1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2762.4000000000001" y="1174.3628185907048"/>
         </scene>
         <!--Students Table View Controller-->
         <scene sceneID="RGl-Fx-JLX">

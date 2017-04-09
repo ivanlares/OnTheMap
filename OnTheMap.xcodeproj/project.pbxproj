@@ -22,6 +22,7 @@
 		EA80476D1E2BBC7E0051FEFB /* InputUrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA80476C1E2BBC7E0051FEFB /* InputUrlViewController.swift */; };
 		EA937C621E2EA52800352703 /* UdacityUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA937C611E2EA52800352703 /* UdacityUser.swift */; };
 		EA9540671E850B2A004263D6 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9540661E850B2A004263D6 /* UIAlertController+Extension.swift */; };
+		EA9F8CCC1E99847E0041A789 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9F8CCB1E99847E0041A789 /* SettingsTableViewController.swift */; };
 		EAB786F51E95CC88006E103A /* StudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB786F41E95CC88006E103A /* StudentsTableViewController.swift */; };
 		EAB786F71E95D64C006E103A /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB786F61E95D64C006E103A /* UIApplication+Extension.swift */; };
 		EAE8163F1E20977B00AC4406 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE8163E1E20977B00AC4406 /* AppDelegate.swift */; };
@@ -49,6 +50,7 @@
 		EA80476C1E2BBC7E0051FEFB /* InputUrlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputUrlViewController.swift; sourceTree = "<group>"; };
 		EA937C611E2EA52800352703 /* UdacityUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityUser.swift; sourceTree = "<group>"; };
 		EA9540661E850B2A004263D6 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
+		EA9F8CCB1E99847E0041A789 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		EAB786F41E95CC88006E103A /* StudentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsTableViewController.swift; sourceTree = "<group>"; };
 		EAB786F61E95D64C006E103A /* UIApplication+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		EAE8163B1E20977B00AC4406 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,6 +185,7 @@
 				EA80476A1E2BBC5E0051FEFB /* InputLocationViewController.swift */,
 				EA80476C1E2BBC7E0051FEFB /* InputUrlViewController.swift */,
 				EAB786F41E95CC88006E103A /* StudentsTableViewController.swift */,
+				EA9F8CCB1E99847E0041A789 /* SettingsTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				EA4C01671E2730A400CB907D /* MapViewController.swift in Sources */,
 				EAB786F71E95D64C006E103A /* UIApplication+Extension.swift in Sources */,
 				EAE8163F1E20977B00AC4406 /* AppDelegate.swift in Sources */,
+				EA9F8CCC1E99847E0041A789 /* SettingsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,6 +18,8 @@ extension ParseClient{
     struct Url{
         static let base =
             "https://parse.udacity.com/parse/classes/StudentLocation"
+        static let studentLocationPath = "/parse/classes/StudentLocation"
+        static let batchBase = "https://parse.udacity.com/parse/batch"
     }
     
     struct QueryParameters{

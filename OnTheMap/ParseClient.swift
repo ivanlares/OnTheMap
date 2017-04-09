@@ -47,9 +47,8 @@ class ParseClient{
         task.resume()
     }
     
-    func performPost(withJsonBody body: [String:Any], completionHandler: @escaping(_ result: AnyObject?, _ error: Error?) -> Void){
+    func performPost(withJsonBody body: [String:Any], urlString: String, completionHandler: @escaping(_ result: AnyObject?, _ error: Error?) -> Void){
         // configure request
-        let urlString = Url.base
         let url = URL(string: urlString)!
         let request = NSMutableURLRequest(url: url)
         request.httpMethod = "POST"
@@ -126,6 +125,13 @@ class ParseClient{
     
     // MARK: Convenience Methods
     
+    func performBatchOperation(withJsonBody json: [String:Any], completionHandler: @escaping (_ results: Any?, _ error: Error?) -> Void){
+        performPost(withJsonBody: json, urlString: Url.batchBase){
+            (results, error) in
+            completionHandler(results, error)
+        }
+    }
+    
     func getStudentLocations(completionHandler: @escaping (_ results: Any?, _ error: Error?) -> Void){
         let queries =
             [URLQueryItem(name:QueryParameters.order,value:QueryValues.order), URLQueryItem(name:QueryParameters.limit, value:String(QueryValues.limit))]
@@ -137,7 +143,7 @@ class ParseClient{
     
     func post(studentData: [String:Any], completion: @escaping (_ objectId: String?, _ error: Error?) -> Void){
         // perform post method with student data
-        performPost(withJsonBody: studentData){ result, error in
+        performPost(withJsonBody: studentData, urlString: Url.base){ result, error in
             // Error handling
             guard error == nil else {
                 completion(nil, error)
