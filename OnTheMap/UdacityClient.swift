@@ -225,7 +225,7 @@ class UdacityClient{
     
     // MARK: OTHER 
     
-    func logout(){
+    func logout(completion: @escaping ()->()){
         // Example code provided by Udacity
         let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
         request.httpMethod = "DELETE"
@@ -239,12 +239,13 @@ class UdacityClient{
         }
         let session = URLSession.shared
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
-            if error != nil { // Handle error…
+            if error != nil {
+                completion()
                 return
             }
             let range = Range(uncheckedBounds: (5, data!.count - 5))
-            let newData = data?.subdata(in: range) /* subset response data! */
-            print(NSString(data: newData!, encoding: String.Encoding.utf8.rawValue)!)
+            let _ = data?.subdata(in: range) /* subset response data! */
+            completion()
         }
         task.resume()
     }

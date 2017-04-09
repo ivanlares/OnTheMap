@@ -28,8 +28,14 @@ class MapViewController: UIViewController{
     // MARK: - Target Action
     
     @IBAction func didPressLogout(_ sender: UIBarButtonItem) {
-        UdacityClient.sharedInstance.logout()
-        self.dismiss(animated: false, completion: nil)
+        activityIndicator.startAnimating()
+        
+        UdacityClient.sharedInstance.logout(){
+            performOnMain {
+                self.activityIndicator.stopAnimating()
+                self.dismiss(animated: false, completion: nil)
+            }
+        }
     }
     
     @IBAction func didPressRefresh(_ sender: UIBarButtonItem) {
