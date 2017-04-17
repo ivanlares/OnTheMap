@@ -63,7 +63,7 @@ class InputLocationViewController: UIViewController {
             
             // perform segue
             performOnMain {
-                self.performSegue(withIdentifier: "SubmitSegue", sender: (coordinate: coordinate, location: locationString))
+                self.performSegue(withIdentifier: "SubmitSegue", sender: LocationData(coordinate, locationString))
             }
         }
     }
